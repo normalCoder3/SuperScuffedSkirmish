@@ -6,13 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
     public int movementSpeed;
 
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-
-            gameObject.GetComponent<Rigidbody2D>().velocity = movementSpeed * transform.localScale * 10 * Time.deltaTime * direction;
+            gameObject.GetComponent<Rigidbody2D>().velocity = movementSpeed * 10 * transform.localScale * Time.deltaTime * direction;
         } 
         else
         {
