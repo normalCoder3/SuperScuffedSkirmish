@@ -9,11 +9,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-            gameObject.GetComponent<Rigidbody2D>().velocity = movementSpeed * transform.localScale * Time.deltaTime * direction;
+            transform.Translate(direction * movementSpeed * Time.deltaTime);
         } 
-        else
-        {
-            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
     }
 }

@@ -20,14 +20,16 @@ public class PlayerAiming : MonoBehaviour
     void Update()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 aimDirection = (crosshair.transform.position - gameObject.transform.position).normalized;
+        Vector2 aimDirection = (crosshair.transform.position - gun.transform.position).normalized;
 
         if (Input.mousePosition.x != mousePosition.x || Input.mousePosition.y != mousePosition.y)
         {
             crosshair.transform.position = mousePosition;
-            if (aimDirection.x > 0 && GetComponent<SpriteRenderer>().flipX || aimDirection.x < 0 && !GetComponent<SpriteRenderer>().flipX)
+            bool flipX = (crosshair.transform.position - transform.position).normalized.x < 0;
+            if (GetComponent<SpriteRenderer>().flipX != flipX)
             {
-                GetComponent<SpriteRenderer>().flipX = !gameObject.GetComponent<SpriteRenderer>().flipX;
+                GetComponent<SpriteRenderer>().flipX = flipX;
+                gun.transform.position = new Vector2(transform.position.x + (flipX ? -0.25f : 0.25f), transform.position.y - 0.25f);
             }
             gun.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x));
         }
@@ -46,7 +48,7 @@ public class PlayerAiming : MonoBehaviour
     {
         GameObject projectile = Instantiate(projectilePrefab);
         projectile.transform.SetPositionAndRotation(gun.transform.position, gun.transform.rotation);
-        projectile.transform.Translate(new Vector2(aimDirection.x * 0.85f, aimDirection.y * 0.85f), Space.World);
-        projectile.GetComponent<Rigidbody2D>().velocity = aimDirection * projectileSpeed;
+        projectile.transform.Translate(new Vector2(aimDirection.x * 0.75f, aimDirection.y * 0.75f), Space.World);
+        projectile.GetComponent<Projectile>().projectileSpeed = projectileSpeed;
     }
 }
