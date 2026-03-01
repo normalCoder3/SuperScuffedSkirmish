@@ -143,4 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4215880cdcedb6245b7ce63ea444f058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 0
+  speed: 0
+  lifetime: 0

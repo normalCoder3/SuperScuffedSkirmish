@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 655077380}
   - component: {fileID: 655077379}
   - component: {fileID: 655077375}
+  - component: {fileID: 655077381}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -468,6 +469,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &655077381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655077374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d3a5925f00ce94aa58f251562061ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 980652980}
+  projectile: {fileID: 523273818915400648, guid: 0e348a871422a19409b291da102f21ce, type: 3}
+  projectileSpeed: 10
+  projectileLifetime: 3
+  firingCooldown: 1
 --- !u!1 &709777517
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,6 +720,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crosshair: {fileID: 1563294693}
   gun: {fileID: 1735611140}
+  projectile: {fileID: 8670853381028892295, guid: ae145a9eba435974c998d8ec90366e7f, type: 3}
+  projectileSpeed: 20
+  projectileLifetime: 1
+  firingCooldown: 0.5
 --- !u!50 &896316670
 Rigidbody2D:
   serializedVersion: 4
@@ -784,7 +806,6 @@ GameObject:
   m_Component:
   - component: {fileID: 980652981}
   - component: {fileID: 980652983}
-  - component: {fileID: 980652982}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -807,21 +828,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 655077377}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &980652982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980652980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d106d3a0a251c041a5cf167e0ee64d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 523273818915400648, guid: 0e348a871422a19409b291da102f21ce, type: 3}
-  projectileSpeed: 10
-  firingCooldown: 0.5
 --- !u!212 &980652983
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -863,7 +869,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: ad3ebb6f04621b446a15a5135301a30b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 46862efe4cc6c7546b4c1102e335104f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -968,7 +974,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1735611141}
   - component: {fileID: 1735611142}
-  - component: {fileID: 1735611143}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -1032,7 +1037,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: ad3ebb6f04621b446a15a5135301a30b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 46862efe4cc6c7546b4c1102e335104f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1043,21 +1048,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1735611143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1735611140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d106d3a0a251c041a5cf167e0ee64d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 8670853381028892295, guid: ae145a9eba435974c998d8ec90366e7f, type: 3}
-  projectileSpeed: 20
-  firingCooldown: 0.5
 --- !u!1 &1957604968
 GameObject:
   m_ObjectHideFlags: 3
