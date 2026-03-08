@@ -7,10 +7,12 @@ public class Projectile : MonoBehaviour
 
     public int speed;
     public int lifetime;
+    public bool flipY;
 
     void Start()
     {
         Invoke("Destroy", lifetime);
+        GetComponent<SpriteRenderer>().flipY = flipY;
     }
 
     void Update()
@@ -20,6 +22,8 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.tag); // Work on this
+        //if (tag == "PlayerProjectile" ^ collision.tag == "Enemy" || tag != "PlayerProjectile" && collision)
         Destroy(gameObject);
     }
 

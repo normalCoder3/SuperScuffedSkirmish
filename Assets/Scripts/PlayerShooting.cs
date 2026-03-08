@@ -4,13 +4,13 @@ public class PlayerShooting : MonoBehaviour
 {
     [Header("Player")]
     public GameObject crosshair;
-    public GameObject gun;
-    [Header("Firearm")]
+    public GameObject weapon;
+    [Header("Weapon")]
     public GameObject projectile;
     public int projectileSpeed;
     public int projectileLifetime;
-    public float firingCooldown;
-    private float lastFiringTime;
+    public float attackCooldown;
+    private float lastAttackTime;
 
     void Start()
     {
@@ -20,30 +20,36 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 aimDirection = (crosshair.transform.position - gun.transform.position).normalized;
-        if (mousePosition.x != crosshair.transform.position.x || mousePosition.y != crosshair.transform.position.y)
+        Vector2 aimDirection = (crosshair.transform.position - weapon.transform.position).normalized;
+
+        if (mousePosition.x != Input.mousePosition.x || mousePosition.y != Input.mousePosition.y)
         {
             crosshair.transform.position = mousePosition;
             bool flip = (crosshair.transform.position - transform.position).x < 0;
+
             if (GetComponent<SpriteRenderer>().flipX != flip)
             {
                 GetComponent<SpriteRenderer>().flipX = flip;
-                gun.GetComponent<SpriteRenderer>().flipY = flip;
-                gun.transform.position = new Vector2(transform.position.x + (flip ? -0.25f : 0.25f), transform.position.y - 0.25f);
+                weapon.GetComponent<SpriteRenderer>().flipY = flip;
+                weapon.transform.position = new Vector2(transform.position.x + (flip ? -0.25f : 0.25f), transform.position.y - 0.25f);
             }
-            gun.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x));
+
+            weapon.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x));
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && Time.time - lastAttackTime > attackCooldown)
         {
-            if (Time.time - lastFiringTime > firingCooldown)
+            if (weapon.tag == "Ranged")
             {
-                lastFiringTime = Time.time;
+                lastAttackTime = Time.time;
+
                 GameObject projectile = Instantiate(this.projectile);
-                projectile.transform.SetPositionAndRotation(gun.transform.position, gun.transform.rotation);
+                Projectile projectileScript = projectile.GetComponent<Projectile>();
+                projectile.transform.SetPositionAndRotation(weapon.transform.position, weapon.transform.rotation);
                 projectile.transform.Translate(new Vector2(aimDirection.x, aimDirection.y), Space.World);
-                projectile.GetComponent<Projectile>().speed = projectileSpeed;
-                projectile.GetComponent<Projectile>().lifetime = projectileLifetime;
+                projectileScript.speed = projectileSpeed;
+                projectileScript.lifetime = projectileLifetime;
+                projectileScript.flipY = GetComponent<SpriteRenderer>().flipX;
             }
         }
     }
