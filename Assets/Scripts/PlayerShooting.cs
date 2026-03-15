@@ -7,8 +7,8 @@ public class PlayerShooting : MonoBehaviour
     public GameObject weapon;
     [Header("Weapon")]
     public GameObject projectile;
-    public int projectileSpeed;
-    public int projectileLifetime;
+    public float projectileSpeed;
+    public float projectileLifetime;
     public float attackCooldown;
     private float lastAttackTime;
 
@@ -39,18 +39,30 @@ public class PlayerShooting : MonoBehaviour
 
         if (Input.GetMouseButton(0) && Time.time - lastAttackTime > attackCooldown)
         {
-            if (weapon.tag == "Ranged")
-            {
-                lastAttackTime = Time.time;
+            lastAttackTime = Time.time;
 
-                GameObject projectile = Instantiate(this.projectile);
-                Projectile projectileScript = projectile.GetComponent<Projectile>();
-                projectile.transform.SetPositionAndRotation(weapon.transform.position, weapon.transform.rotation);
-                projectile.transform.Translate(new Vector2(aimDirection.x, aimDirection.y), Space.World);
+            GameObject projectile = Instantiate(this.projectile);
+            Projectile projectileScript = projectile.GetComponent<Projectile>();
+            projectile.transform.SetPositionAndRotation(weapon.transform.position, weapon.transform.rotation);
+            projectileScript.lifetime = projectileLifetime;
+
+            if (weapon.tag == "Melee")
+            {
+                weapon.GetComponent<SpriteRenderer>().flipY = true;
+                projectile.transform.Translate(new Vector2(aimDirection.x * 0.4f, aimDirection.y * 0.4f), Space.World);
+                Invoke("ResetMelee", attackCooldown / 2);
+                projectileScript.speed = 0;
+            }
+            else
+            {
+                projectile.transform.Translate(new Vector2(aimDirection.x * 0.65f, aimDirection.y * 0.65f), Space.World);
                 projectileScript.speed = projectileSpeed;
-                projectileScript.lifetime = projectileLifetime;
                 projectileScript.flipY = GetComponent<SpriteRenderer>().flipX;
             }
         }
+    }
+    private void ResetMelee()
+    {
+        weapon.GetComponent<SpriteRenderer>().flipY = false;
     }
 }

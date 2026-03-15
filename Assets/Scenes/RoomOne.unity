@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39293868}
   - component: {fileID: 39293867}
+  - component: {fileID: 39293869}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Melee
@@ -206,6 +207,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 42619222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &39293869
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39293866}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0904e23a0f3508e48821ecdcc8cf55e4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &42619215
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c581329f040e5742a77af705b239449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  movementSpeed: 2
 --- !u!50 &42619218
 Rigidbody2D:
   serializedVersion: 4
@@ -439,10 +461,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 39293866}
-  projectile: {fileID: 0}
+  projectile: {fileID: 5418103164485034945, guid: e20ad43f4a2f46341ba54213b6246016, type: 3}
   projectileSpeed: 0
-  projectileLifetime: 1
-  attackCooldown: 0.1
+  projectileLifetime: 0.01
+  attackCooldown: 0.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,7 +826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 980652980}
-  projectile: {fileID: 523273818915400648, guid: 0e348a871422a19409b291da102f21ce, type: 3}
+  projectile: {fileID: 8670853381028892295, guid: ec5128d002f27834282f69841478da15, type: 3}
   projectileSpeed: 10
   projectileLifetime: 3
   attackCooldown: 1
@@ -1045,7 +1067,7 @@ MonoBehaviour:
   projectile: {fileID: 8670853381028892295, guid: ae145a9eba435974c998d8ec90366e7f, type: 3}
   projectileSpeed: 20
   projectileLifetime: 1
-  attackCooldown: 0
+  attackCooldown: 0.5
 --- !u!50 &896316670
 Rigidbody2D:
   serializedVersion: 4

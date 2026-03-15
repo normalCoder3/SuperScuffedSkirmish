@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -5,8 +6,8 @@ using UnityEngine.UIElements;
 public class Projectile : MonoBehaviour
 {
 
-    public int speed;
-    public int lifetime;
+    public float speed;
+    public float lifetime;
     public bool flipY;
 
     void Start()
@@ -17,14 +18,16 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+        if (speed > 0) { 
         transform.Translate(speed * Time.deltaTime * Vector2.right);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.tag); // Work on this
-        //if (tag == "PlayerProjectile" ^ collision.tag == "Enemy" || tag != "PlayerProjectile" && collision)
-        Destroy(gameObject);
+        if (collision.tag != tag.Substring(0, collision.tag.Length)) {
+            Destroy(gameObject);
+        }
     }
 
     private void Destroy()
