@@ -5,17 +5,12 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public int movementSpeed;
-    //// Start is called before the first frame update
-    //void Start()
-    //{
+    public ParticleSystem hitEffect;
 
-    //}
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     { 
         Vector2 direction = (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized;
-        transform.Translate(movementSpeed * Time.deltaTime * direction);
+        GetComponent<Rigidbody2D>().velocity = GameObject.FindGameObjectWithTag("Player") != null ? movementSpeed * Time.deltaTime * direction : Vector2.zero;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -23,6 +18,7 @@ public class EnemyMovement : MonoBehaviour
         if (collision.tag == "PlayerProjectile")
         {
             Destroy(gameObject);
+            Instantiate(hitEffect, transform.position, transform.rotation);
         }
     }
 }

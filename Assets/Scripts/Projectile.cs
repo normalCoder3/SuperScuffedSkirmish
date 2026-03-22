@@ -12,11 +12,11 @@ public class Projectile : MonoBehaviour
 
     void Start()
     {
-        Invoke("Destroy", lifetime);
         GetComponent<SpriteRenderer>().flipY = flipY;
+        Invoke("Destroy", lifetime);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (speed > 0) { 
         transform.Translate(speed * Time.deltaTime * Vector2.right);

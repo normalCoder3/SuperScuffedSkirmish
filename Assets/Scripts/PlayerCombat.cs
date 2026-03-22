@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerShooting : MonoBehaviour
+public class PlayerCombat : MonoBehaviour
 {
     [Header("Player")]
     public GameObject crosshair;
@@ -30,7 +30,7 @@ public class PlayerShooting : MonoBehaviour
             if (GetComponent<SpriteRenderer>().flipX != flip)
             {
                 GetComponent<SpriteRenderer>().flipX = flip;
-                weapon.GetComponent<SpriteRenderer>().flipY = flip;
+                weapon.GetComponent<SpriteRenderer>().flipY = GetComponent<SpriteRenderer>().flipX;
                 weapon.transform.position = new Vector2(transform.position.x + (flip ? -0.25f : 0.25f), transform.position.y - 0.25f);
             }
 
@@ -48,10 +48,10 @@ public class PlayerShooting : MonoBehaviour
 
             if (weapon.tag == "Melee")
             {
-                weapon.GetComponent<SpriteRenderer>().flipY = true;
                 projectile.transform.Translate(new Vector2(aimDirection.x * 0.4f, aimDirection.y * 0.4f), Space.World);
-                Invoke("ResetMelee", attackCooldown / 2);
                 projectileScript.speed = 0;
+                weapon.GetComponent<SpriteRenderer>().flipY = !GetComponent<SpriteRenderer>().flipX;
+                Invoke("ResetMelee", attackCooldown / 2);
             }
             else
             {
@@ -63,6 +63,6 @@ public class PlayerShooting : MonoBehaviour
     }
     private void ResetMelee()
     {
-        weapon.GetComponent<SpriteRenderer>().flipY = false;
+        weapon.GetComponent<SpriteRenderer>().flipY = GetComponent<SpriteRenderer>().flipX;
     }
 }

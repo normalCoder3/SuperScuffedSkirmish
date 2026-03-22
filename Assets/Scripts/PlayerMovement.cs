@@ -3,13 +3,20 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public int movementSpeed;
+    public ParticleSystem hitEffect;
 
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        GetComponent<Rigidbody2D>().velocity = Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0
+            ? movementSpeed * Time.deltaTime * new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized : Vector2.zero;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "EnemyProjectile" || collision.tag == "Enemy")
         {
-            Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-            transform.Translate(movementSpeed * Time.deltaTime * direction);
-        } 
+            Instantiate(hitEffect, transform.position, transform.rotation);
+            Debug.Log("Imagine getting hit by a " + collision.name + ", couldn't be me.");
+        }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShooting : MonoBehaviour
+public class EnemyCombat : MonoBehaviour
 {
     [Header("Enemy")]
     private GameObject target;
@@ -29,7 +29,7 @@ public class EnemyShooting : MonoBehaviour
         if (GetComponent<SpriteRenderer>().flipX != flip)
         {
             GetComponent<SpriteRenderer>().flipX = flip;
-            weapon.GetComponent<SpriteRenderer>().flipY = flip;
+            weapon.GetComponent<SpriteRenderer>().flipY = GetComponent<SpriteRenderer>().flipX;
             weapon.transform.position = new Vector2(transform.position.x + (flip ? -0.25f : 0.25f), transform.position.y - 0.25f);
         }
          
@@ -46,10 +46,10 @@ public class EnemyShooting : MonoBehaviour
 
             if (weapon.tag == "Melee")
             {
-                weapon.GetComponent<SpriteRenderer>().flipY = !flip; // Try modifying z rotation directly?
                 projectile.transform.Translate(new Vector2(aimDirection.x * 0.4f, aimDirection.y * 0.4f), Space.World);
-                Invoke("FlipMelee", attackCooldown / 2);
                 projectileScript.speed = 0;
+                weapon.GetComponent<SpriteRenderer>().flipY = !GetComponent<SpriteRenderer>().flipX;
+                Invoke("ResetMelee", attackCooldown / 2);
             }
             else
             {
@@ -60,8 +60,8 @@ public class EnemyShooting : MonoBehaviour
         }
     }
 
-    private void FlipMelee()
+    private void ResetMelee()
     {
-        weapon.GetComponent<SpriteRenderer>().flipY = !weapon.GetComponent<SpriteRenderer>().flipY;
+        weapon.GetComponent<SpriteRenderer>().flipY = GetComponent<SpriteRenderer>().flipX;
     }
 }
