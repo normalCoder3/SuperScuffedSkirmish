@@ -22,9 +22,18 @@ public class PlayerCombat : MonoBehaviour
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 aimDirection = (crosshair.transform.position - weapon.transform.position).normalized;
 
+        // Crosshair
         if (mousePosition.x != Input.mousePosition.x || mousePosition.y != Input.mousePosition.y)
         {
             crosshair.transform.position = mousePosition;
+            if (crosshair.GetComponent<SpriteRenderer>().sprite.name == "meleeCrosshair")
+            {
+                crosshair.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x));
+            } 
+            else if (crosshair.transform.rotation.z != 0)
+            {
+                crosshair.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
             bool flip = (crosshair.transform.position - transform.position).x < 0;
 
             if (GetComponent<SpriteRenderer>().flipX != flip)
@@ -37,6 +46,7 @@ public class PlayerCombat : MonoBehaviour
             weapon.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x));
         }
 
+        // Combat
         if (Input.GetMouseButton(0) && Time.time - lastAttackTime > attackCooldown)
         {
             lastAttackTime = Time.time;
@@ -61,6 +71,7 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
+
     private void ResetMelee()
     {
         weapon.GetComponent<SpriteRenderer>().flipY = GetComponent<SpriteRenderer>().flipX;

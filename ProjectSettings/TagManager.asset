@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Enemy
   - PlayerProjectile
-  - EnemyProjectile
   - Projectile
   - Melee
   - Ranged
