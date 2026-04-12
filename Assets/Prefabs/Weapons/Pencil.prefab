@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3256557586861302960}
   m_Layer: 0
   m_Name: Pencil
-  m_TagString: Untagged
+  m_TagString: Melee
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a472e7e899eea4f9a9d6efa8d12f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slash: {fileID: 5418103164485034945, guid: 075df27306251f549b706b25777f7e2e, type: 3}
+  slashLifetime: 0.5
+  attackCooldown: 1
