@@ -19,7 +19,7 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
-            Debug.LogError("There's a problem with finding the player's weapon.");
+            Debug.LogError("There's a problem with finding the player's weapon");
         }
     }
 
@@ -48,7 +48,11 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            //weapon.GetComponent<Script>();
+            weapon.GetComponent<IWeapon>().M1(aimDirection);
+        }
+        if (Input.GetMouseButton(1))
+        {
+            weapon.GetComponent<IWeapon>().M2(aimDirection);
         }
     }
 }

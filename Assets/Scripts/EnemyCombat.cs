@@ -14,13 +14,11 @@ public class EnemyCombat : MonoBehaviour
     public float attackCooldown;
     private float lastAttackTime;
 
-    // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector2 aimDirection = (target.transform.position - weapon.transform.position).normalized;
