@@ -17,10 +17,6 @@ public class PlayerCombat : MonoBehaviour
         {
             weapon = GameObject.FindGameObjectWithTag("Ranged");
         }
-        else
-        {
-            Debug.LogError("There's a problem with finding the player's weapon");
-        }
     }
 
     void Update()

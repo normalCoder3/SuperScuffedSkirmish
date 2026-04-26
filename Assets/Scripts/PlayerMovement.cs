@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public int health;
     public int movementSpeed;
-    public ParticleSystem hitEffect;
+    //public ParticleSystem hitEffect;
 
     void FixedUpdate()
     {
@@ -15,8 +16,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.tag == "EnemyProjectile" || collision.tag == "Enemy")
         {
-            Instantiate(hitEffect, transform.position, transform.rotation);
-            Debug.Log("Imagine getting hit by a " + collision.name + ", couldn't be me.");
+            //Instantiate(hitEffect, transform.position, transform.rotation);
+            Debug.Log(health + " HP left after being hit by a " + collision.name);
         }
     }
 }

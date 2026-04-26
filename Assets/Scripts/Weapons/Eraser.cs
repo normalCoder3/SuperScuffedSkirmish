@@ -4,8 +4,9 @@ public class Eraser : MonoBehaviour, IWeapon
 {
     [Header("Projectile")]
     public GameObject projectile;
-    public float projectileSpeed;
-    public float projectileLifetime;
+    public int damage;
+    public float lifetime;
+    public int speed;
     [Header("Combat")]
     public float attackCooldown;
     private float lastAttackTime;
@@ -26,9 +27,10 @@ public class Eraser : MonoBehaviour, IWeapon
             projectile.transform.SetPositionAndRotation(transform.position, transform.rotation);
             projectile.transform.Translate(aimDirection, Space.World);
             gameObject.SetActive(false);
-            projectile.GetComponent<Projectile>().speed = projectileSpeed;
-            projectile.GetComponent<Projectile>().lifetime = projectileLifetime;
-            Invoke("ResetRanged", attackCooldown - attackCooldown * 0.1f);
+            projectile.GetComponent<Projectile>().damage = damage;
+            projectile.GetComponent<Projectile>().lifetime = lifetime;
+            projectile.GetComponent<Projectile>().speed = speed;
+            Invoke("ResetThrowable", attackCooldown - attackCooldown * 0.1f);
         }
     }
 
@@ -37,7 +39,7 @@ public class Eraser : MonoBehaviour, IWeapon
         Debug.Log(name + " M2 ability does not exist");
     }
 
-    private void ResetRanged()
+    private void ResetThrowable()
     {
         gameObject.SetActive(true);
     }

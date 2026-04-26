@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 7306586771928918693}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.25, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 6049996433261832141, guid: 500b216016bc6e441bf78ae07def6743, type: 3}
-  projectileSpeed: 20
-  projectileLifetime: 2
+  damage: 1
+  lifetime: 2
+  speed: 10
   attackCooldown: 1

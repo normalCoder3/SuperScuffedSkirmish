@@ -9,7 +9,7 @@ public class EnemyCombat : MonoBehaviour
     public GameObject weapon;
     [Header("Weapon")]
     public GameObject projectile;
-    public float projectileSpeed;
+    public int projectileSpeed;
     public float projectileLifetime;
     public float attackCooldown;
     private float lastAttackTime;

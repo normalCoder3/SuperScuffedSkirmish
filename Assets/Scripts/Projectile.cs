@@ -3,8 +3,9 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    public float speed;
+    public int damage;
     public float lifetime;
+    public int speed;
     public bool flipY;
 
     void Start()
@@ -16,7 +17,7 @@ public class Projectile : MonoBehaviour
     void FixedUpdate()
     {
         if (speed > 0) { 
-        transform.Translate(speed * Time.deltaTime * Vector2.right);
+            transform.Translate(speed * Time.deltaTime * Vector2.right);
         }
     }
 
