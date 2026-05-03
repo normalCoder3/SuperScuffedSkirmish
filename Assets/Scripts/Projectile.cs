@@ -1,24 +1,25 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IProjectile
 {
 
-    public int damage;
+    public float damage;
     public float lifetime;
-    public int speed;
+    public float speed;
     public bool flipY;
 
     void Start()
     {
         GetComponent<SpriteRenderer>().flipY = flipY;
-        Invoke("Destroy", lifetime);
+        if (lifetime > 0)
+        {
+            Invoke("Destroy", lifetime);    
+        }
     }
 
     void FixedUpdate()
     {
-        if (speed > 0) { 
-            transform.Translate(speed * Time.deltaTime * Vector2.right);
-        }
+        transform.Translate(speed * Time.deltaTime * Vector2.right);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,8 +29,20 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void Destroy()
+    public void ConfigureProjectile(float damage, float lifetime, float speed)
+    {
+        this.damage = damage;
+        this.lifetime = lifetime;
+        this.speed = speed;
+    }
+
+    public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    public float GetDamage()
+    {
+        return damage;
     }
 }

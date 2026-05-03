@@ -1,12 +1,14 @@
 using System;
 using UnityEngine;
 
-public class Scribble : MonoBehaviour
+public class Scribble : MonoBehaviour, IEnemy
 {
+    [Header("Movement")]
     private GameObject target;
-    public int damage;
-    public int health;
-    public int movementSpeed;
+    public float movementSpeed;
+    [Header("Combat")]
+    public float damage;
+    public float health;
 
     void Start()
     {
@@ -24,22 +26,22 @@ public class Scribble : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = !target ? Vector2.zero : movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
     }
 
+    public float GetDamage()
+    {
+        return damage;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "PlayerProjectile")
         {
-            try
-            {
-                health -= collision.GetComponent<Projectile>().damage;
-            }
-            catch (NullReferenceException)
-            {
-                health -= collision.GetComponent<Slash>().damage;
-            }
-            if (health < 0)
-            {
-                Destroy(gameObject);
-            }
+            health -= collision.GetComponent<IProjectile>().GetDamage();
         }
+
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }

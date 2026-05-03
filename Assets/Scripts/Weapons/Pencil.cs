@@ -4,7 +4,7 @@ public class Pencil : MonoBehaviour, IWeapon
 {
     [Header("Slash")]
     public GameObject slash;
-    public int damage;
+    public float damage;
     public float lifetime;
     [Header("Combat")]
     public float attackCooldown;
@@ -36,8 +36,7 @@ public class Pencil : MonoBehaviour, IWeapon
             slash.transform.SetPositionAndRotation(transform.position, transform.rotation);
             slash.transform.Translate(aimDirection, Space.World);
             GetComponent<SpriteRenderer>().flipY = !GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX;
-            slash.GetComponent<Slash>().damage = damage;
-            slash.GetComponent<Slash>().lifetime = lifetime;
+            slash.GetComponent<IProjectile>().ConfigureProjectile(damage, lifetime, 0);
             Invoke("ResetMelee", attackCooldown / 2);
         }
     }

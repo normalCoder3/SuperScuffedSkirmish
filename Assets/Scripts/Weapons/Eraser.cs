@@ -4,9 +4,9 @@ public class Eraser : MonoBehaviour, IWeapon
 {
     [Header("Projectile")]
     public GameObject projectile;
-    public int damage;
+    public float damage;
     public float lifetime;
-    public int speed;
+    public float speed;
     [Header("Combat")]
     public float attackCooldown;
     private float lastAttackTime;
@@ -27,9 +27,7 @@ public class Eraser : MonoBehaviour, IWeapon
             projectile.transform.SetPositionAndRotation(transform.position, transform.rotation);
             projectile.transform.Translate(aimDirection, Space.World);
             gameObject.SetActive(false);
-            projectile.GetComponent<Projectile>().damage = damage;
-            projectile.GetComponent<Projectile>().lifetime = lifetime;
-            projectile.GetComponent<Projectile>().speed = speed;
+            projectile.GetComponent<IProjectile>().ConfigureProjectile(damage, lifetime, speed);
             Invoke("ResetThrowable", attackCooldown - attackCooldown * 0.1f);
         }
     }

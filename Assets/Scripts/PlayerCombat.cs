@@ -4,6 +4,11 @@ public class PlayerCombat : MonoBehaviour
 {
     private GameObject crosshair;
     private GameObject weapon;
+    public float health;
+    public float invincibilityTime;
+    private float lastHitTime;
+    public ParticleSystem hitEffect;
+
 
     void Start()
     {
@@ -50,5 +55,39 @@ public class PlayerCombat : MonoBehaviour
         {
             weapon.GetComponent<IWeapon>().M2(aimDirection);
         }
+    }
+
+    // Doesn't work with OnTriggerStay2D, for some reason
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (Time.time - lastHitTime > invincibilityTime)
+        {
+            lastHitTime = Time.time;
+            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 123);
+            Invoke("ResetColor", invincibilityTime);
+
+            if (collision.tag == "EnemyProjectile")
+            {
+                Instantiate(hitEffect, transform.position, transform.rotation);
+                health -= collision.GetComponent<IProjectile>().GetDamage();
+                Debug.Log(health + " HP left after being hit by a " + collision.name);
+            }
+            else if (collision.tag == "Enemy")
+            {
+                Instantiate(hitEffect, transform.position, transform.rotation);
+                health -= collision.GetComponent<IEnemy>().GetDamage();
+                Debug.Log(health + " HP left after being hit by a " + collision.name);
+            }
+
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private void ResetColor()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

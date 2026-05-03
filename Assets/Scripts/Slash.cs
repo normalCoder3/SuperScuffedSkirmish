@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class Slash : MonoBehaviour
+public class Slash : MonoBehaviour, IProjectile
 {
 
-    public int damage;
+    public float damage;
     public float lifetime;
 
     void Start()
     {
-        Invoke("Destroy", lifetime);
+        if (lifetime > 0)
+        {
+            Invoke("Destroy", lifetime);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,8 +22,19 @@ public class Slash : MonoBehaviour
         }
     }
 
-    private void Destroy()
+    public void ConfigureProjectile(float damage, float lifetime, float speed)
+    {
+        this.damage = damage;
+        this.lifetime = lifetime;
+    }
+
+    public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    public float GetDamage()
+    {
+        return damage;
     }
 }
