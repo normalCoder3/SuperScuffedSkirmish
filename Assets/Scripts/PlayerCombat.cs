@@ -1,10 +1,14 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
 {
     private GameObject crosshair;
+    private GameObject healthIcon;
     private GameObject weapon;
     public float health;
+    private float maxHealth;
     public float invincibilityTime;
     private float lastHitTime;
     public ParticleSystem hitEffect;
@@ -13,14 +17,16 @@ public class PlayerCombat : MonoBehaviour
     void Start()
     {
         crosshair = GameObject.Find("Crosshair");
+        maxHealth = health;
+        healthIcon = GameObject.Find("Health Icon");
 
-        if (GameObject.FindGameObjectsWithTag("Melee").Length == 1)
-        {
-            weapon = GameObject.FindGameObjectWithTag("Melee");
-        } 
-        else if (GameObject.FindGameObjectsWithTag("Ranged").Length == 1)
+        if (GameObject.FindGameObjectsWithTag("Ranged").Length == 1)
         {
             weapon = GameObject.FindGameObjectWithTag("Ranged");
+        } 
+        else if (GameObject.FindGameObjectsWithTag("Melee").Length == 1)
+        {
+            weapon = GameObject.FindGameObjectWithTag("Melee");
         }
     }
 
@@ -57,27 +63,32 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    // Doesn't work with OnTriggerStay2D, for some reason
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Time.time - lastHitTime > invincibilityTime)
+        if (collision.tag == "EnemyProjectile" || collision.tag == "Enemy" && Time.time - lastHitTime > invincibilityTime)
         {
             lastHitTime = Time.time;
-            GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 123);
-            Invoke("ResetColor", invincibilityTime);
-
-            if (collision.tag == "EnemyProjectile")
+            try
             {
-                Instantiate(hitEffect, transform.position, transform.rotation);
                 health -= collision.GetComponent<IProjectile>().GetDamage();
-                Debug.Log(health + " HP left after being hit by a " + collision.name);
             }
-            else if (collision.tag == "Enemy")
+            catch (NullReferenceException)
             {
-                Instantiate(hitEffect, transform.position, transform.rotation);
                 health -= collision.GetComponent<IEnemy>().GetDamage();
+            }
+            finally
+            {
+                Color color = GetComponent<SpriteRenderer>().color;
+                GetComponent<SpriteRenderer>().color = new Color(1, color.g / 2, color.b / 2, 1);
+                Invoke("ExitInvincibility", invincibilityTime);
+                Instantiate(hitEffect, transform.position, transform.rotation);
                 Debug.Log(health + " HP left after being hit by a " + collision.name);
             }
+
+            // Red doesn't work
+            float healthDifference = 1 - health / maxHealth;
+            healthIcon.GetComponent<Image>().color = new Color( (float) (Math.Pow(-100, healthDifference - 1) + 1), (float) Math.Pow(100, -healthDifference), (float) Math.Pow(100, -healthDifference), 1);
+            Debug.Log(healthIcon.GetComponent<Image>().color);
 
             if (health <= 0)
             {
@@ -86,8 +97,8 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    private void ResetColor()
+    private void ExitInvincibility()
     {
-        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, GetComponent<SpriteRenderer>().color.a);
     }
 }
