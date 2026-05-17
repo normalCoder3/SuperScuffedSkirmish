@@ -99,5 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slash: {fileID: 5418103164485034945, guid: 075df27306251f549b706b25777f7e2e, type: 3}
   damage: 2
-  lifetime: 0.25
+  lifetime: 0.125
   attackCooldown: 0.5

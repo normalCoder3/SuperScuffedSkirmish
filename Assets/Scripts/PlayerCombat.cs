@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,18 +8,19 @@ public class PlayerCombat : MonoBehaviour
     private GameObject crosshair;
     private GameObject healthIcon;
     private GameObject weapon;
+    public ParticleSystem hitEffect;
+    public TMP_Text healthText;
     public float health;
     private float maxHealth;
     public float invincibilityTime;
     private float lastHitTime;
-    public ParticleSystem hitEffect;
 
 
     void Start()
     {
         crosshair = GameObject.Find("Crosshair");
-        maxHealth = health;
         healthIcon = GameObject.Find("Health Icon");
+        maxHealth = health;
 
         if (GameObject.FindGameObjectsWithTag("Ranged").Length == 1)
         {
@@ -28,6 +30,8 @@ public class PlayerCombat : MonoBehaviour
         {
             weapon = GameObject.FindGameObjectWithTag("Melee");
         }
+
+        healthText.text = " " + health + "/" + health;
     }
 
     void Update()
@@ -85,13 +89,12 @@ public class PlayerCombat : MonoBehaviour
                 Debug.Log(health + " HP left after being hit by a " + collision.name);
             }
 
-            // Red doesn't work
-            float healthDifference = 1 - health / maxHealth;
-            healthIcon.GetComponent<Image>().color = new Color( (float) (Math.Pow(-100, healthDifference - 1) + 1), (float) Math.Pow(100, -healthDifference), (float) Math.Pow(100, -healthDifference), 1);
-            Debug.Log(healthIcon.GetComponent<Image>().color);
+            healthText.text = " " + health + "/" + maxHealth;
+            healthIcon.GetComponent<Image>().color = new Color((float)-Math.Pow(100, -health / maxHealth) + 1, (float)Math.Pow(25, health / maxHealth - 1), (float)Math.Pow(25, health / maxHealth - 1));
 
             if (health <= 0)
             {
+                healthText.color = Color.black;
                 Destroy(gameObject);
             }
         }
