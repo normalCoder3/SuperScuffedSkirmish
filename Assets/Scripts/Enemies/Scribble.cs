@@ -8,6 +8,7 @@ public class Scribble : MonoBehaviour, IEnemy
     [Header("Combat")]
     public float damage;
     public float health;
+    public ParticleSystem hitEffect;
 
     void Start()
     {
@@ -39,6 +40,7 @@ public class Scribble : MonoBehaviour, IEnemy
 
         if (health < 0)
         {
+            Instantiate(hitEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }
 

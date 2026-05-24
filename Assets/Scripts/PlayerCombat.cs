@@ -8,10 +8,12 @@ public class PlayerCombat : MonoBehaviour
     private GameObject crosshair;
     private GameObject healthIcon;
     private GameObject weapon;
-    public ParticleSystem hitEffect;
+    [Header("Health")]
     public TMP_Text healthText;
     public float health;
     private float maxHealth;
+    [Header("Hits")]
+    public ParticleSystem hitEffect;
     public float invincibilityTime;
     private float lastHitTime;
 
@@ -82,11 +84,9 @@ public class PlayerCombat : MonoBehaviour
             }
             finally
             {
-                Color color = GetComponent<SpriteRenderer>().color;
-                GetComponent<SpriteRenderer>().color = new Color(1, color.g / 2, color.b / 2, 1);
+                GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
                 Invoke("ExitInvincibility", invincibilityTime);
                 Instantiate(hitEffect, transform.position, transform.rotation);
-                Debug.Log(health + " HP left after being hit by a " + collision.name);
             }
 
             healthText.text = " " + health + "/" + maxHealth;
@@ -95,13 +95,13 @@ public class PlayerCombat : MonoBehaviour
             if (health <= 0)
             {
                 healthText.color = Color.black;
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
 
     private void ExitInvincibility()
     {
-        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, GetComponent<SpriteRenderer>().color.a);
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

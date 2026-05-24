@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2561198696511402396}
   - component: {fileID: 8727750115599456653}
   m_Layer: 0
-  m_Name: Eraser
+  m_Name: Eraser (Projectile)
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
