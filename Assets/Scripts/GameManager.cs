@@ -1,21 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
-    public Tilemap tilemap;
+    public GameObject enemy;
+    private GameObject player;
+    public float spawnCooldown;
+    private float lastSpawnTime;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Time.time - lastSpawnTime > spawnCooldown && player.activeInHierarchy)
+        {
+            lastSpawnTime = Time.time;
+            
+            GameObject enemy = Instantiate(this.enemy, GameObject.Find("Enemies").transform);
+            enemy.transform.position = new Vector2(Random.Range(-6.5f, 11.5f), Random.Range(22.5f, 25.5f));
+        }
     }
 }

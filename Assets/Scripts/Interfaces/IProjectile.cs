@@ -1,6 +1,6 @@
 public interface IProjectile
 {
-    void ConfigureProjectile(float damage, float lifetime, float speed);
+    void Configure(float damage, float lifetime, float speed = 0);
     void Destroy();
     float GetDamage();
 }

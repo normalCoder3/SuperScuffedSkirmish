@@ -26,9 +26,9 @@ public class Eraser : MonoBehaviour, IWeapon
             GameObject projectile = Instantiate(this.projectile);
             projectile.transform.SetPositionAndRotation(transform.position, transform.rotation);
             projectile.transform.Translate(aimDirection, Space.World);
+            projectile.GetComponent<IProjectile>().Configure(damage, lifetime, speed);
             gameObject.SetActive(false);
-            projectile.GetComponent<IProjectile>().ConfigureProjectile(damage, lifetime, speed);
-            Invoke("ResetThrowable", attackCooldown - attackCooldown * 0.1f);
+            Invoke("ResetThrowable", attackCooldown * 0.9f);
         }
     }
 

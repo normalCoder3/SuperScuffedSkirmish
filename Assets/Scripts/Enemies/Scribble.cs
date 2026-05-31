@@ -35,12 +35,12 @@ public class Scribble : MonoBehaviour, IEnemy
     {
         if (collision.tag == "PlayerProjectile")
         {
-            health -= collision.GetComponent<IProjectile>().GetDamage();
+            health = Mathf.Max(health - collision.GetComponent<IProjectile>().GetDamage(), 0);
         }
 
-        if (health < 0)
+        if (health <= 0)
         {
-            Instantiate(hitEffect, transform.position, transform.rotation);
+            Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
             Destroy(gameObject);
         }
 

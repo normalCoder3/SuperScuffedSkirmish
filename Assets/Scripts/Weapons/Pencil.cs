@@ -13,16 +13,6 @@ public class Pencil : MonoBehaviour, IWeapon
 
     void Start()
     {
-        if (attackCooldown != 0 && lifetime == 0) 
-        {
-            lifetime = attackCooldown / 2;
-            Debug.LogWarning(name + " slash lifetime defaulted to " + lifetime);
-        }
-        else if (lifetime != 0 && attackCooldown == 0)
-        {
-            attackCooldown = lifetime * 2;
-            Debug.LogWarning(name + " attack cooldown defaulted to " + lifetime);
-        }
         GameObject.Find("Crosshair").GetComponent<Crosshair>().SetMelee();
     }
 
@@ -35,8 +25,8 @@ public class Pencil : MonoBehaviour, IWeapon
             GameObject slash = Instantiate(this.slash);
             slash.transform.SetPositionAndRotation(transform.position, transform.rotation);
             slash.transform.Translate(aimDirection, Space.World);
+            slash.GetComponent<IProjectile>().Configure(damage, lifetime);
             GetComponent<SpriteRenderer>().flipY = !GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX;
-            slash.GetComponent<IProjectile>().ConfigureProjectile(damage, lifetime, 0);
             Invoke("ResetMelee", attackCooldown / 2);
         }
     }

@@ -22,7 +22,7 @@ public class Slash : MonoBehaviour, IProjectile
         }
     }
 
-    public void ConfigureProjectile(float damage, float lifetime, float speed)
+    public void Configure(float damage, float lifetime, float speed)
     {
         this.damage = damage;
         this.lifetime = lifetime;

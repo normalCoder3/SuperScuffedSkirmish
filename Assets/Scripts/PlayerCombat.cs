@@ -11,7 +11,11 @@ public class PlayerCombat : MonoBehaviour
     [Header("Health")]
     public TMP_Text healthText;
     public float health;
+    private float lastRegenTime;
     private float maxHealth;
+    public float regenAmount;
+    public float regenCooldown;
+    public float regenDowntime;
     [Header("Hits")]
     public ParticleSystem hitEffect;
     public float invincibilityTime;
@@ -33,7 +37,7 @@ public class PlayerCombat : MonoBehaviour
             weapon = GameObject.FindGameObjectWithTag("Melee");
         }
 
-        healthText.text = " " + health + "/" + health;
+        UpdateHealth();
     }
 
     void Update()
@@ -67,6 +71,16 @@ public class PlayerCombat : MonoBehaviour
         {
             weapon.GetComponent<IWeapon>().M2(aimDirection);
         }
+
+        if (health < maxHealth && Time.time - lastHitTime > regenDowntime)
+        {
+            if (Time.time - lastRegenTime > regenCooldown)
+            {
+                lastRegenTime = Time.time;
+                health = Mathf.Min(health + regenAmount, maxHealth);
+                UpdateHealth();
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -76,11 +90,11 @@ public class PlayerCombat : MonoBehaviour
             lastHitTime = Time.time;
             try
             {
-                health -= collision.GetComponent<IProjectile>().GetDamage();
+                health = Mathf.Max(health - collision.GetComponent<IProjectile>().GetDamage(), 0);
             }
             catch (NullReferenceException)
             {
-                health -= collision.GetComponent<IEnemy>().GetDamage();
+                health = Mathf.Max(health - collision.GetComponent<IEnemy>().GetDamage(), 0);
             }
             finally
             {
@@ -89,8 +103,7 @@ public class PlayerCombat : MonoBehaviour
                 Instantiate(hitEffect, transform.position, transform.rotation);
             }
 
-            healthText.text = " " + health + "/" + maxHealth;
-            healthIcon.GetComponent<Image>().color = new Color((float)-Math.Pow(100, -health / maxHealth) + 1, (float)Math.Pow(25, health / maxHealth - 1), (float)Math.Pow(25, health / maxHealth - 1));
+            UpdateHealth();
 
             if (health <= 0)
             {
@@ -103,5 +116,11 @@ public class PlayerCombat : MonoBehaviour
     private void ExitInvincibility()
     {
         GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    private void UpdateHealth()
+    {
+        healthText.text = " " + health + "/" + maxHealth;
+        healthIcon.GetComponent<Image>().color = new Color((float)-Math.Pow(100, -health / maxHealth) + 1, (float)Math.Pow(25, health / maxHealth - 1), (float)Math.Pow(25, health / maxHealth - 1));
     }
 }

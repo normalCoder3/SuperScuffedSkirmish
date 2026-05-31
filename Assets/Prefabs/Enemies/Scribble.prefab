@@ -220,6 +220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 100
-  attackCooldown: 1
   damage: 1
   health: 1
+  hitEffect: {fileID: 6093686801365895455, guid: 049c5b686e55e414a81e306d4c5c475a, type: 3}
