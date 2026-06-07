@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject indicator;
     public GameObject enemy;
     private GameObject player;
     public float spawnCooldown;
@@ -18,8 +19,9 @@ public class GameManager : MonoBehaviour
         {
             lastSpawnTime = Time.time;
             
-            GameObject enemy = Instantiate(this.enemy, GameObject.Find("Enemies").transform);
-            enemy.transform.position = new Vector2(Random.Range(-6.5f, 11.5f), Random.Range(22.5f, 25.5f));
+            GameObject indicator = Instantiate(this.indicator, GameObject.Find("Enemies").transform);
+            indicator.transform.position = new Vector2(Random.Range(-6.5f, 11.5f), Random.Range(22.5f, 25.5f));
+            indicator.GetComponent<Indicator>().enemy = enemy;
         }
     }
 }
