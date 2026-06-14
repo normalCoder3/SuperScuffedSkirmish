@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Crayon : MonoBehaviour, IEnemy
@@ -12,17 +14,23 @@ public class Crayon : MonoBehaviour, IEnemy
     private GameObject line;
     public Color lineColor;
     private float lastLineUpdate;
+    private Vector2[] linePoints = new Vector2[50];
     public float lineUpdateInterval;
+    public GameObject projectile;
 
     void Start()
     {
-        // NEXT TIME CREATE A LINE PREFAB AND CONFIGURE IT BEFOREHAND
         target = GameObject.FindGameObjectWithTag("Player");
-        line = new GameObject("Crayon Line", typeof(LineRenderer));
-        line.transform.SetParent(GameObject.Find("Enemy").transform);
-        line.GetComponent<LineRenderer>().positionCount = 1;
+        line = Instantiate(projectile, GameObject.Find("Enemies").transform);
         line.GetComponent<LineRenderer>().startColor = lineColor;
         line.GetComponent<LineRenderer>().endColor = lineColor;
+        for (int i = 0; i < line.GetComponent<LineRenderer>().positionCount; i++)
+        {
+            Vector2 crayonTip = new Vector2(transform.position.x, transform.position.y - 0.95f);
+            line.GetComponent<LineRenderer>().SetPosition(i, crayonTip);
+            linePoints[i] = crayonTip;
+        }
+        line.GetComponent<EdgeCollider2D>().SetPoints(linePoints.ToList());
     }
 
     void FixedUpdate()
@@ -39,19 +47,27 @@ public class Crayon : MonoBehaviour, IEnemy
 
     void Update()
     {
+        line.GetComponent<LineRenderer>().SetPosition(line.GetComponent<LineRenderer>().positionCount - 1, new Vector2(transform.position.x, transform.position.y - 0.95f));
+
         if (Time.time - lastLineUpdate > lineUpdateInterval)
         {
-            for (int i = 0; i < 5; i++)
+            lastLineUpdate = Time.time;
+
+            for (int i = 0; i < line.GetComponent<LineRenderer>().positionCount; i++)
             {
-                //if (i == 4)
-                //{
-                //    line.GetComponent<LineRenderer>().SetPosition(i, new Vector2(transform.position.x, transform.position.y - 1));
-                //}
-                //else
-                //{
-                //    line.GetComponent<LineRenderer>().SetPosition(i, line.GetComponent<LineRenderer>().GetPosition(i + 1));
-                //}
+                Vector2 crayonTip = new Vector2(transform.position.x, transform.position.y - 0.95f);
+
+                if (i == line.GetComponent<LineRenderer>().positionCount - 1)
+                {
+                    line.GetComponent<LineRenderer>().SetPosition(i, crayonTip);
+                }
+                else
+                {
+                    line.GetComponent<LineRenderer>().SetPosition(i, line.GetComponent<LineRenderer>().GetPosition(i + 1));
+                }
+                linePoints[i] = crayonTip;
             }
+            line.GetComponent<EdgeCollider2D>().SetPoints(linePoints.ToList());
         }
     }
 
@@ -70,6 +86,7 @@ public class Crayon : MonoBehaviour, IEnemy
         if (health <= 0)
         {
             //Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
+            Destroy(line);
             Destroy(gameObject);
         }
 

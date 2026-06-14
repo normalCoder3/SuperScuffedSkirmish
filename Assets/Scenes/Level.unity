@@ -10440,26 +10440,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1161976982}
     m_Modifications:
-    - target: {fileID: -7362255554230520687, guid: c57a8aa76c5f13d4cb18be0861a15707, type: 3}
-      propertyPath: line
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: -7362255554230520687, guid: c57a8aa76c5f13d4cb18be0861a15707, type: 3}
-      propertyPath: lineColor.b
-      value: 0.63529414
-      objectReference: {fileID: 0}
-    - target: {fileID: -7362255554230520687, guid: c57a8aa76c5f13d4cb18be0861a15707, type: 3}
-      propertyPath: lineColor.g
-      value: 0.6156863
-      objectReference: {fileID: 0}
-    - target: {fileID: -7362255554230520687, guid: c57a8aa76c5f13d4cb18be0861a15707, type: 3}
-      propertyPath: lineColor.r
-      value: 0.13725491
-      objectReference: {fileID: 0}
-    - target: {fileID: -7362255554230520687, guid: c57a8aa76c5f13d4cb18be0861a15707, type: 3}
-      propertyPath: lineUpdateInterval
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 258949290692749204, guid: c57a8aa76c5f13d4cb18be0861a15707, type: 3}
       propertyPath: m_Name
       value: Crayon

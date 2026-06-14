@@ -220,3 +220,6 @@ MonoBehaviour:
   movementSpeed: 100
   damage: 1
   health: 1
+  lineColor: {r: 0.13725491, g: 0.6156863, b: 0.63529414, a: 1}
+  lineUpdateInterval: 0.1
+  projectile: {fileID: 3103752789225457794, guid: af9f0dc4998ebfe4a9210790a410fa19, type: 3}
