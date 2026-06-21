@@ -33,7 +33,7 @@ public class Scribble : MonoBehaviour, IEnemy
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "PlayerProjectile")
+        if (collision.CompareTag("PlayerProjectile"))
         {
             health = Mathf.Max(health - collision.GetComponent<IProjectile>().GetDamage(), 0);
         }

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
             lastSpawnTime = Time.time;
             
             GameObject indicator = Instantiate(this.indicator, GameObject.Find("Enemies").transform);
-            indicator.transform.position = new Vector2(Random.Range(-6.5f, 11.5f), Random.Range(22.5f, 25.5f));
+            indicator.transform.position = new(Random.Range(-6.5f, 11.5f), Random.Range(22.5f, 25.5f));
             indicator.GetComponent<Indicator>().enemy = enemy;
         }
     }

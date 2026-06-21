@@ -6,7 +6,7 @@ public class Indicator : MonoBehaviour
 
     void Start()
     {
-        Invoke("Spawn", 1f);
+        Invoke(nameof(Spawn), 1f);
     }
 
     private void Spawn()

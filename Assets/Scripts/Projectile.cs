@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour, IProjectile
         GetComponent<SpriteRenderer>().flipY = flipY;
         if (lifetime > 0)
         {
-            Invoke("Destroy", lifetime);    
+            Invoke(nameof(Destroy), lifetime);
         }
     }
 
@@ -24,7 +24,8 @@ public class Projectile : MonoBehaviour, IProjectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != tag.Substring(0, collision.tag.Length)) {
+        if (!collision.CompareTag(tag[..collision.tag.Length]))
+        {
             Destroy(gameObject);
         }
     }

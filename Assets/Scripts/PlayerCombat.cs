@@ -58,7 +58,7 @@ public class PlayerCombat : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().flipX = flip;
             weapon.GetComponent<SpriteRenderer>().flipY = GetComponent<SpriteRenderer>().flipX;
-            weapon.transform.position = new Vector2(transform.position.x + (flip ? -0.25f : 0.25f), transform.position.y - 0.25f);
+            weapon.transform.position = new(transform.position.x + (flip ? -0.25f : 0.25f), transform.position.y - 0.25f);
         }
 
         weapon.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x));
@@ -85,7 +85,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "EnemyProjectile" || collision.tag == "Enemy" && Time.time - lastHitTime > invincibilityTime)
+        if (collision.CompareTag("Projectile") || collision.CompareTag("Enemy") && Time.time - lastHitTime > invincibilityTime)
         {
             lastHitTime = Time.time;
             try
@@ -98,8 +98,8 @@ public class PlayerCombat : MonoBehaviour
             }
             finally
             {
-                GetComponent<SpriteRenderer>().color = new Color(1, 0.5f, 0.5f, 1);
-                Invoke("ExitInvincibility", invincibilityTime);
+                GetComponent<SpriteRenderer>().color = new(1, 0.5f, 0.5f, 1);
+                Invoke(nameof(ExitInvincibility), invincibilityTime);
                 Instantiate(hitEffect, transform.position, transform.rotation);
             }
 
@@ -121,6 +121,6 @@ public class PlayerCombat : MonoBehaviour
     private void UpdateHealth()
     {
         healthText.text = " " + health + "/" + maxHealth;
-        healthIcon.GetComponent<Image>().color = new Color((float)-Math.Pow(100, -health / maxHealth) + 1, (float)Math.Pow(25, health / maxHealth - 1), (float)Math.Pow(25, health / maxHealth - 1));
+        healthIcon.GetComponent<Image>().color = new((float)-Math.Pow(100, -health / maxHealth) + 1, (float)Math.Pow(25, health / maxHealth - 1), (float)Math.Pow(25, health / maxHealth - 1));
     }
 }

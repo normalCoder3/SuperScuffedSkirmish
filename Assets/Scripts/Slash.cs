@@ -10,13 +10,13 @@ public class Slash : MonoBehaviour, IProjectile
     {
         if (lifetime > 0)
         {
-            Invoke("Destroy", lifetime);
+            Invoke(nameof(Destroy), lifetime);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != tag.Substring(0, collision.tag.Length))
+        if (!collision.CompareTag(tag[..collision.tag.Length]))
         {
             Destroy(GetComponent<BoxCollider2D>());
         }

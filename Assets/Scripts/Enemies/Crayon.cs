@@ -11,26 +11,24 @@ public class Crayon : MonoBehaviour, IEnemy
     public float damage;
     public float health;
     //public ParticleSystem hitEffect;
-    private GameObject line;
-    public Color lineColor;
     private float lastLineUpdate;
-    private Vector2[] linePoints = new Vector2[50];
+    public Color lineColor;
+    private Vector2[] linePoints;
     public float lineUpdateInterval;
-    public GameObject projectile;
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
-        line = Instantiate(projectile, GameObject.Find("Enemies").transform);
-        line.GetComponent<LineRenderer>().startColor = lineColor;
-        line.GetComponent<LineRenderer>().endColor = lineColor;
-        for (int i = 0; i < line.GetComponent<LineRenderer>().positionCount; i++)
+        GetComponent<LineRenderer>().startColor = lineColor;
+        GetComponent<LineRenderer>().endColor = lineColor;
+        linePoints = new Vector2[GetComponent<LineRenderer>().positionCount];
+
+        for (int i = 0; i < GetComponent<LineRenderer>().positionCount; i++)
         {
-            Vector2 crayonTip = new Vector2(transform.position.x, transform.position.y - 0.95f);
-            line.GetComponent<LineRenderer>().SetPosition(i, crayonTip);
-            linePoints[i] = crayonTip;
+            GetComponent<LineRenderer>().SetPosition(i, new(transform.position.x, transform.position.y - 0.95f));
+            linePoints[i] = transform.InverseTransformPoint(GetComponent<LineRenderer>().GetPosition(i));
         }
-        line.GetComponent<EdgeCollider2D>().SetPoints(linePoints.ToList());
+        GetComponent<EdgeCollider2D>().SetPoints(linePoints.ToList());
     }
 
     void FixedUpdate()
@@ -47,27 +45,23 @@ public class Crayon : MonoBehaviour, IEnemy
 
     void Update()
     {
-        line.GetComponent<LineRenderer>().SetPosition(line.GetComponent<LineRenderer>().positionCount - 1, new Vector2(transform.position.x, transform.position.y - 0.95f));
-
         if (Time.time - lastLineUpdate > lineUpdateInterval)
         {
             lastLineUpdate = Time.time;
 
-            for (int i = 0; i < line.GetComponent<LineRenderer>().positionCount; i++)
+            for (int i = 0; i < GetComponent<LineRenderer>().positionCount; i++)
             {
-                Vector2 crayonTip = new Vector2(transform.position.x, transform.position.y - 0.95f);
-
-                if (i == line.GetComponent<LineRenderer>().positionCount - 1)
+                if (i == GetComponent<LineRenderer>().positionCount - 1)
                 {
-                    line.GetComponent<LineRenderer>().SetPosition(i, crayonTip);
+                    GetComponent<LineRenderer>().SetPosition(i, new(transform.position.x, transform.position.y - 0.95f));
                 }
                 else
                 {
-                    line.GetComponent<LineRenderer>().SetPosition(i, line.GetComponent<LineRenderer>().GetPosition(i + 1));
+                    GetComponent<LineRenderer>().SetPosition(i, GetComponent<LineRenderer>().GetPosition(i + 1));
                 }
-                linePoints[i] = crayonTip;
+                linePoints[i] = transform.InverseTransformPoint(GetComponent<LineRenderer>().GetPosition(i));
             }
-            line.GetComponent<EdgeCollider2D>().SetPoints(linePoints.ToList());
+            GetComponent<EdgeCollider2D>().SetPoints(linePoints.ToList());
         }
     }
 
@@ -78,7 +72,7 @@ public class Crayon : MonoBehaviour, IEnemy
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "PlayerProjectile")
+        if (collision.CompareTag("PlayerProjectile"))
         {
             health = Mathf.Max(health - collision.GetComponent<IProjectile>().GetDamage(), 0);
         }
@@ -86,7 +80,6 @@ public class Crayon : MonoBehaviour, IEnemy
         if (health <= 0)
         {
             //Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
-            Destroy(line);
             Destroy(gameObject);
         }
 

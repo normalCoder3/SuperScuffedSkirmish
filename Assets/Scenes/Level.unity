@@ -10444,6 +10444,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crayon
       objectReference: {fileID: 0}
+    - target: {fileID: 1222493406955077788, guid: c57a8aa76c5f13d4cb18be0861a15707, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1222493406955077788, guid: c57a8aa76c5f13d4cb18be0861a15707, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 8747040770302575437, guid: c57a8aa76c5f13d4cb18be0861a15707, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.91

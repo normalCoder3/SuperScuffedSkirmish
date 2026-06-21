@@ -28,7 +28,7 @@ public class Eraser : MonoBehaviour, IWeapon
             projectile.transform.Translate(aimDirection, Space.World);
             projectile.GetComponent<IProjectile>().Configure(damage, lifetime, speed);
             gameObject.SetActive(false);
-            Invoke("ResetThrowable", attackCooldown * 0.9f);
+            Invoke(nameof(ResetThrowable), attackCooldown * 0.9f);
         }
     }
 
