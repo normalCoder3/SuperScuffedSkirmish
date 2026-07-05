@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class Crayon : MonoBehaviour, IEnemy
 {
+    [Header("Configuration")]
+    public List<Color> colors;
+    private int index;
+    public List<Sprite> sprites;
     [Header("Movement")]
     private GameObject target;
     public float movementSpeed;
     [Header("Combat")]
     public float damage;
     public float health;
-    //public ParticleSystem hitEffect;
+    public ParticleSystem hitEffect;
     private float lastLineUpdate;
-    public Color lineColor;
     private Vector2[] linePoints;
     public float lineUpdateInterval;
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
-        GetComponent<LineRenderer>().startColor = lineColor;
-        GetComponent<LineRenderer>().endColor = lineColor;
-        linePoints = new Vector2[GetComponent<LineRenderer>().positionCount];
 
+        index = Random.Range(0, 4);
+        GetComponent<SpriteRenderer>().sprite = sprites[index];
+        GetComponent<LineRenderer>().startColor = colors[index];
+        GetComponent<LineRenderer>().endColor = colors[index];
+
+        linePoints = new Vector2[GetComponent<LineRenderer>().positionCount];
         for (int i = 0; i < GetComponent<LineRenderer>().positionCount; i++)
         {
             GetComponent<LineRenderer>().SetPosition(i, new(transform.position.x, transform.position.y - 0.95f));
@@ -77,11 +83,13 @@ public class Crayon : MonoBehaviour, IEnemy
             health = Mathf.Max(health - collision.GetComponent<IProjectile>().GetDamage(), 0);
         }
 
-        if (health <= 0)
+        if (hitEffect && health <= 0)
         {
-            //Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
+            ParticleSystem.MainModule main = hitEffect.GetComponent<ParticleSystem>().main;
+            main.startColor = colors[index];
+            Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
+            hitEffect = null;
             Destroy(gameObject);
         }
-
     }
 }

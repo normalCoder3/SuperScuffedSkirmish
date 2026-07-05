@@ -751,7 +751,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.1
       mode: 0
       spread: 0
       speed:
@@ -980,7 +980,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 2
+        scalar: 4
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -4835,7 +4835,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e6360d4911497644b041f6ad136b35f, type: 2}
+  - {fileID: 2100000, guid: 4d39a475b8e776948a1df0cf4af5f27e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

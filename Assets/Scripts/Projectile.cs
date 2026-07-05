@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour, IProjectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag(tag[..collision.tag.Length]))
+        if (!tag.Contains(collision.tag))
         {
             Destroy(gameObject);
         }

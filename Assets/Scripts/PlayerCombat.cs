@@ -28,13 +28,13 @@ public class PlayerCombat : MonoBehaviour
         healthIcon = GameObject.Find("Health Icon");
         maxHealth = health;
 
-        if (GameObject.FindGameObjectsWithTag("Ranged").Length == 1)
+        if (GameObject.FindGameObjectsWithTag("RangedWeapon").Length == 1)
         {
-            weapon = GameObject.FindGameObjectWithTag("Ranged");
+            weapon = GameObject.FindGameObjectWithTag("RangedWeapon");
         } 
-        else if (GameObject.FindGameObjectsWithTag("Melee").Length == 1)
+        else if (GameObject.FindGameObjectsWithTag("MeleeWeapon").Length == 1)
         {
-            weapon = GameObject.FindGameObjectWithTag("Melee");
+            weapon = GameObject.FindGameObjectWithTag("MeleeWeapon");
         }
 
         UpdateHealth();
@@ -85,7 +85,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Projectile") || collision.CompareTag("Enemy") && Time.time - lastHitTime > invincibilityTime)
+        if (collision.CompareTag("EnemyProjectile") || collision.CompareTag("Enemy") && Time.time - lastHitTime > invincibilityTime)
         {
             lastHitTime = Time.time;
             try
@@ -120,6 +120,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void UpdateHealth()
     {
+        Debug.Log("Incorporate hurt health icon");
         healthText.text = " " + health + "/" + maxHealth;
         healthIcon.GetComponent<Image>().color = new((float)-Math.Pow(100, -health / maxHealth) + 1, (float)Math.Pow(25, health / maxHealth - 1), (float)Math.Pow(25, health / maxHealth - 1));
     }

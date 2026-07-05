@@ -751,7 +751,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.1
       mode: 0
       spread: 0
       speed:
@@ -4835,7 +4835,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 14b4fe85bb03bb24fbbaf83420999a52, type: 2}
+  - {fileID: 2100000, guid: 84a35a3b0290a0243a83c7a116150ff4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

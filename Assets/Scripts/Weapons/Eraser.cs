@@ -34,7 +34,7 @@ public class Eraser : MonoBehaviour, IWeapon
 
     public void M2(Vector2 aimDirection)
     {
-        Debug.Log(name + " M2 ability does not exist");
+        Debug.Log(name + " has no M2 ability!");
     }
 
     private void ResetThrowable()
