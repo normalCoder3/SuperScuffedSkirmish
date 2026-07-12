@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,10 @@ public class PlayerCombat : MonoBehaviour
     private GameObject healthIcon;
     private GameObject weapon;
     [Header("Health")]
-    public TMP_Text healthText;
     public float health;
+    public Sprite healthIconImage;
+    public Sprite hurtIconImage;
+    public TMP_Text healthText;
     private float lastRegenTime;
     private float maxHealth;
     public float regenAmount;
@@ -78,6 +81,7 @@ public class PlayerCombat : MonoBehaviour
             {
                 lastRegenTime = Time.time;
                 health = Mathf.Min(health + regenAmount, maxHealth);
+                healthIcon.GetComponent<Image>().sprite = healthIconImage;
                 UpdateHealth();
             }
         }
@@ -99,11 +103,11 @@ public class PlayerCombat : MonoBehaviour
             finally
             {
                 GetComponent<SpriteRenderer>().color = new(1, 0.5f, 0.5f, 1);
+                healthIcon.GetComponent<Image>().sprite = hurtIconImage;
                 Invoke(nameof(ExitInvincibility), invincibilityTime);
                 Instantiate(hitEffect, transform.position, transform.rotation);
+                UpdateHealth();
             }
-
-            UpdateHealth();
 
             if (health <= 0)
             {
@@ -120,7 +124,6 @@ public class PlayerCombat : MonoBehaviour
 
     private void UpdateHealth()
     {
-        Debug.Log("Incorporate hurt health icon");
         healthText.text = " " + health + "/" + maxHealth;
         healthIcon.GetComponent<Image>().color = new((float)-Math.Pow(100, -health / maxHealth) + 1, (float)Math.Pow(25, health / maxHealth - 1), (float)Math.Pow(25, health / maxHealth - 1));
     }

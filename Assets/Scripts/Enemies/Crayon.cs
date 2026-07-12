@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Crayon : MonoBehaviour, IEnemy
 {
+    /*
+    Create projectile prefab for crayon line "projectile"
+    Copy and paste relevant components
+    Create crayon line script, assign source crayon from this script first
+    Maybe update some packages too
+    */
+    private GameObject line;
     [Header("Configuration")]
     public List<Color> colors;
     private int index;
@@ -39,7 +46,6 @@ public class Crayon : MonoBehaviour, IEnemy
 
     void FixedUpdate()
     {
-
         bool flip = (target.transform.position - transform.position).x < 0;
         if (GetComponent<SpriteRenderer>().flipX != flip)
         {
@@ -85,9 +91,9 @@ public class Crayon : MonoBehaviour, IEnemy
 
         if (hitEffect && health <= 0)
         {
-            ParticleSystem.MainModule main = hitEffect.GetComponent<ParticleSystem>().main;
+            ParticleSystem hitParticles = Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
+            ParticleSystem.MainModule main = hitParticles.transform.Find("Particles").GetComponent<ParticleSystem>().main;
             main.startColor = colors[index];
-            Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
             hitEffect = null;
             Destroy(gameObject);
         }
