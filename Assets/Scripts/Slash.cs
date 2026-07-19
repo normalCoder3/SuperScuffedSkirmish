@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Slash : MonoBehaviour, IProjectile
 {
-
     public float damage;
     public float lifetime;
+    public bool persistent;
 
     void Start()
     {
@@ -16,16 +16,17 @@ public class Slash : MonoBehaviour, IProjectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag(tag[..collision.tag.Length]))
+        if (!persistent && !collision.CompareTag(tag[..collision.tag.Length]))
         {
             Destroy(GetComponent<BoxCollider2D>());
         }
     }
 
-    public void Configure(float damage, float lifetime, float speed)
+    public void Configure(float damage, float lifetime, float speed, bool persistent)
     {
         this.damage = damage;
         this.lifetime = lifetime;
+        this.persistent = persistent;
     }
 
     public void Destroy()

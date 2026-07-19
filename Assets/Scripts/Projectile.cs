@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IProjectile
 {
-
     public float damage;
+    public bool flipY;
     public float lifetime;
     public float speed;
-    public bool flipY;
+    public bool persistent;
 
     void Start()
     {
-        GetComponent<SpriteRenderer>().flipY = flipY;
+        if (flipY)
+        {
+            GetComponent<SpriteRenderer>().flipY = flipY;
+        }
         if (lifetime > 0)
         {
             Invoke(nameof(Destroy), lifetime);
@@ -24,17 +27,18 @@ public class Projectile : MonoBehaviour, IProjectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!tag.Contains(collision.tag))
+        if (!persistent && !tag.Contains(collision.tag))
         {
             Destroy(gameObject);
         }
     }
 
-    public void Configure(float damage, float lifetime, float speed)
+    public void Configure(float damage, float lifetime, float speed, bool persistent)
     {
         this.damage = damage;
         this.lifetime = lifetime;
         this.speed = speed;
+        this.persistent = persistent;
     }
 
     public void Destroy()

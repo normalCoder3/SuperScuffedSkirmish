@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class Crayon : MonoBehaviour, IEnemy
 {
-    /*
-    Create projectile prefab for crayon line "projectile"
-    Copy and paste relevant components
-    Create crayon line script, assign source crayon from this script first
-    Maybe update some packages too
-    */
-    private GameObject line;
+    public GameObject projectile;
     [Header("Configuration")]
     public List<Color> colors;
     private int index;
@@ -23,25 +17,28 @@ public class Crayon : MonoBehaviour, IEnemy
     public float health;
     public ParticleSystem hitEffect;
     private float lastLineUpdate;
+    private GameObject line;
     private Vector2[] linePoints;
     public float lineUpdateInterval;
 
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+        line = Instantiate(projectile, GameObject.Find("Enemies").transform);
+        line.GetComponent<IProjectile>().Configure(damage, 0, persistent: true);
 
         index = Random.Range(0, 4);
         GetComponent<SpriteRenderer>().sprite = sprites[index];
-        GetComponent<LineRenderer>().startColor = colors[index];
-        GetComponent<LineRenderer>().endColor = colors[index];
+        line.GetComponent<LineRenderer>().startColor = colors[index];
+        line.GetComponent<LineRenderer>().endColor = colors[index];
 
-        linePoints = new Vector2[GetComponent<LineRenderer>().positionCount];
-        for (int i = 0; i < GetComponent<LineRenderer>().positionCount; i++)
+        linePoints = new Vector2[line.GetComponent<LineRenderer>().positionCount];
+        for (int i = 0; i < line.GetComponent<LineRenderer>().positionCount; i++)
         {
-            GetComponent<LineRenderer>().SetPosition(i, new(transform.position.x, transform.position.y - 0.95f));
-            linePoints[i] = transform.InverseTransformPoint(GetComponent<LineRenderer>().GetPosition(i));
+            line.GetComponent<LineRenderer>().SetPosition(i, new(transform.position.x, transform.position.y - 0.95f));
+            linePoints[i] = transform.InverseTransformPoint(line.GetComponent<LineRenderer>().GetPosition(i));
         }
-        GetComponent<EdgeCollider2D>().SetPoints(linePoints.ToList());
+        line.GetComponent<EdgeCollider2D>().SetPoints(linePoints.ToList());
     }
 
     void FixedUpdate()
@@ -53,27 +50,24 @@ public class Crayon : MonoBehaviour, IEnemy
         }
 
         GetComponent<Rigidbody2D>().velocity = !target ? Vector2.zero : movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
-    }
 
-    void Update()
-    {
         if (Time.time - lastLineUpdate > lineUpdateInterval)
         {
             lastLineUpdate = Time.time;
 
-            for (int i = 0; i < GetComponent<LineRenderer>().positionCount; i++)
+            for (int i = 0; i < line.GetComponent<LineRenderer>().positionCount; i++)
             {
-                if (i == GetComponent<LineRenderer>().positionCount - 1)
+                if (i == line.GetComponent<LineRenderer>().positionCount - 1)
                 {
-                    GetComponent<LineRenderer>().SetPosition(i, new(transform.position.x, transform.position.y - 0.95f));
+                    line.GetComponent<LineRenderer>().SetPosition(i, new(transform.position.x, transform.position.y - 0.95f));
                 }
                 else
                 {
-                    GetComponent<LineRenderer>().SetPosition(i, GetComponent<LineRenderer>().GetPosition(i + 1));
+                    line.GetComponent<LineRenderer>().SetPosition(i, line.GetComponent<LineRenderer>().GetPosition(i + 1));
                 }
-                linePoints[i] = transform.InverseTransformPoint(GetComponent<LineRenderer>().GetPosition(i));
+                linePoints[i] = line.GetComponent<LineRenderer>().GetPosition(i);
             }
-            GetComponent<EdgeCollider2D>().SetPoints(linePoints.ToList());
+            line.GetComponent<EdgeCollider2D>().SetPoints(linePoints.ToList());
         }
     }
 
@@ -95,6 +89,7 @@ public class Crayon : MonoBehaviour, IEnemy
             ParticleSystem.MainModule main = hitParticles.transform.Find("Particles").GetComponent<ParticleSystem>().main;
             main.startColor = colors[index];
             hitEffect = null;
+            Destroy(line);
             Destroy(gameObject);
         }
     }

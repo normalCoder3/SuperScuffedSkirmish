@@ -89,7 +89,7 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("EnemyProjectile") || collision.CompareTag("Enemy") && Time.time - lastHitTime > invincibilityTime)
+        if ((collision.CompareTag("EnemyProjectile") || collision.CompareTag("Enemy")) && Time.time - lastHitTime > invincibilityTime)
         {
             lastHitTime = Time.time;
             try

@@ -4900,7 +4900,7 @@ GameObject:
   - component: {fileID: 6093686801365895455}
   - component: {fileID: 5212240677129887947}
   m_Layer: 0
-  m_Name: ScribbleHit
+  m_Name: Scribble Hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
