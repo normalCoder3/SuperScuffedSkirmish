@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1553871498491769689}
   - component: {fileID: 6584327929907672921}
   - component: {fileID: 7240956677549249046}
+  - component: {fileID: 789050131489421601}
   - component: {fileID: 5270261158029106390}
   m_Layer: 0
   m_Name: Crayon Line
@@ -375,6 +376,20 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &789050131489421601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568170869131893410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c8ca060964499d4193d33a72a970937, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crayon: {fileID: 0}
+  lineUpdateInterval: 0
 --- !u!114 &5270261158029106390
 MonoBehaviour:
   m_ObjectHideFlags: 0

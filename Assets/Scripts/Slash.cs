@@ -16,7 +16,7 @@ public class Slash : MonoBehaviour, IProjectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!persistent && !collision.CompareTag(tag[..collision.tag.Length]))
+        if (!persistent && !tag.Contains(collision.tag))
         {
             Destroy(GetComponent<BoxCollider2D>());
         }
