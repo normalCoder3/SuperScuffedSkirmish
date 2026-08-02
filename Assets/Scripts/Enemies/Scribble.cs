@@ -17,13 +17,16 @@ public class Scribble : MonoBehaviour, IEnemy
     
     void FixedUpdate()
     {
-        bool flip = (target.transform.position - transform.position).x < 0;
-        if (GetComponent<SpriteRenderer>().flipX != flip)
+        if (target != null)
         {
-            GetComponent<SpriteRenderer>().flipX = flip;
-        }
+            bool flip = (target.transform.position - transform.position).x < 0;
+            if (GetComponent<SpriteRenderer>().flipX != flip)
+            {
+                GetComponent<SpriteRenderer>().flipX = flip;
+            }
 
-        GetComponent<Rigidbody2D>().velocity = !target ? Vector2.zero : movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
+            GetComponent<Rigidbody2D>().velocity = target == null ? Vector2.zero : movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
+        }
     }
 
     public float GetDamage()
@@ -44,6 +47,5 @@ public class Scribble : MonoBehaviour, IEnemy
             hitEffect = null;
             Destroy(gameObject);
         }
-
     }
 }

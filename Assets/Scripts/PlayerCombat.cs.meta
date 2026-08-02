@@ -4,8 +4,10 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - hitEffect: {fileID: 6093686801365895455, guid: 53f84221cac22c942bfe9435a46c50a9, type: 3}
+  - healthIconImage: {fileID: 21300000, guid: 9d9a37428e8b2b1419499dbb698cd055, type: 3}
+  - hurtIconImage: {fileID: 21300000, guid: 5504aef4d63dad745bc0bb1468218399, type: 3}
   - healthText: {instanceID: 0}
+  - hitEffect: {fileID: 6093686801365895455, guid: 53f84221cac22c942bfe9435a46c50a9, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

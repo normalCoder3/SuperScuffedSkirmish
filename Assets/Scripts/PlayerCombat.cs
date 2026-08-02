@@ -1,6 +1,5 @@
 using System;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +26,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Start()
     {
+        Debug.LogWarning("Fix camera and enemy movement on loss");
         crosshair = GameObject.Find("Crosshair");
         healthIcon = GameObject.Find("Health Icon");
         maxHealth = health;
@@ -87,7 +87,17 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        TakeHit(collision);
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
+    {
+        TakeHit(collision);
+    }
+
+    private void TakeHit(Collider2D collision)
     {
         if ((collision.CompareTag("EnemyProjectile") || collision.CompareTag("Enemy")) && Time.time - lastHitTime > invincibilityTime)
         {
@@ -112,7 +122,7 @@ public class PlayerCombat : MonoBehaviour
             if (health <= 0)
             {
                 healthText.color = Color.black;
-                gameObject.SetActive(false);
+                Destroy(gameObject);
             }
         }
     }
