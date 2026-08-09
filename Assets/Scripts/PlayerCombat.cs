@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerCombat : MonoBehaviour
     private GameObject crosshair;
     private GameObject healthIcon;
     private GameObject weapon;
+    private GameObject virtualCamera;
     [Header("Health")]
     public float health;
     public Sprite healthIconImage;
@@ -26,9 +28,9 @@ public class PlayerCombat : MonoBehaviour
 
     void Start()
     {
-        Debug.LogWarning("Fix camera and enemy movement on loss");
         crosshair = GameObject.Find("Crosshair");
         healthIcon = GameObject.Find("Health Icon");
+        virtualCamera = GameObject.Find("Virtual Camera");
         maxHealth = health;
 
         if (GameObject.FindGameObjectsWithTag("RangedWeapon").Length == 1)
@@ -122,6 +124,7 @@ public class PlayerCombat : MonoBehaviour
             if (health <= 0)
             {
                 healthText.color = Color.black;
+                virtualCamera.SetActive(false);
                 Destroy(gameObject);
             }
         }

@@ -42,14 +42,21 @@ public class Sharpener : MonoBehaviour, IEnemy
 
     void FixedUpdate()
     {
-        bool flip = (target.transform.position - transform.position).x < 0;
-        if (GetComponent<SpriteRenderer>().flipX != flip)
-        {
-            GetComponent<SpriteRenderer>().flipX = flip;
-        }
+        if (target != null) {
+            bool flip = (target.transform.position - transform.position).x < 0;
+            if (GetComponent<SpriteRenderer>().flipX != flip)
+            {
+                GetComponent<SpriteRenderer>().flipX = flip;
+            }
 
-        GetComponent<Rigidbody2D>().velocity = target == null ? Vector2.zero : movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
+            GetComponent<Rigidbody2D>().velocity = movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        }
     }
+
 
     public float GetDamage()
     {

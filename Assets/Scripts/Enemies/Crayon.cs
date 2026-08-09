@@ -42,7 +42,11 @@ public class Crayon : MonoBehaviour, IEnemy
                 GetComponent<SpriteRenderer>().flipX = flip;
             }
 
-            GetComponent<Rigidbody2D>().velocity = target == null ? Vector2.zero : movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
+            GetComponent<Rigidbody2D>().velocity = movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
 

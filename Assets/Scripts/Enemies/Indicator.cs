@@ -6,6 +6,7 @@ public class Indicator : MonoBehaviour
 
     void Start()
     {
+        transform.localScale = enemy.transform.localScale;
         Invoke(nameof(Spawn), 1f);
     }
 

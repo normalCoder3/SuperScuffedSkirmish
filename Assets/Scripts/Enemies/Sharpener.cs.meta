@@ -4,7 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - hitEffect: {instanceID: 0}
+  - hitEffect: {fileID: 6093686801365895455, guid: fa10783d0684bd944b3baa248e22b0fa, type: 3}
   - projectile: {fileID: 831977872211496671, guid: 588160586ebcc0f44acb8f456880c352, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
