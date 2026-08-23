@@ -22,10 +22,9 @@ public class Pencil : MonoBehaviour, IWeapon
         {
             lastAttackTime = Time.time;
 
-            GameObject slash = Instantiate(this.slash);
-            slash.transform.SetPositionAndRotation(transform.position, transform.rotation);
-            slash.transform.Translate(aimDirection, Space.World);
+            GameObject slash = Instantiate(this.slash, transform.position, transform.rotation);
             slash.GetComponent<IProjectile>().Configure(damage, lifetime);
+            slash.transform.Translate(aimDirection, Space.World);
             GetComponent<SpriteRenderer>().flipY = !GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX;
             Invoke(nameof(ResetMelee), attackCooldown / 2);
         }

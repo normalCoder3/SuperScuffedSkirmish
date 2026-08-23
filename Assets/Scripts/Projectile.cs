@@ -10,10 +10,6 @@ public class Projectile : MonoBehaviour, IProjectile
 
     void Start()
     {
-        if (flipY)
-        {
-            GetComponent<SpriteRenderer>().flipY = flipY;
-        }
         if (lifetime > 0)
         {
             Invoke(nameof(Destroy), lifetime);
@@ -44,6 +40,11 @@ public class Projectile : MonoBehaviour, IProjectile
     public void Destroy()
     {
         Destroy(gameObject);
+    }
+
+    public void FlipY(bool flip)
+    {
+        GetComponent<SpriteRenderer>().flipY = flip;
     }
 
     public float GetDamage()

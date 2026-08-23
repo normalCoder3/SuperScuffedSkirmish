@@ -1,7 +1,6 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
@@ -99,6 +98,11 @@ public class PlayerCombat : MonoBehaviour
         TakeHit(collision);
     }
 
+    private void ExitInvincibility()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
     private void TakeHit(Collider2D collision)
     {
         if ((collision.CompareTag("EnemyProjectile") || collision.CompareTag("Enemy")) && Time.time - lastHitTime > invincibilityTime)
@@ -128,11 +132,6 @@ public class PlayerCombat : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-    }
-
-    private void ExitInvincibility()
-    {
-        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     private void UpdateHealth()

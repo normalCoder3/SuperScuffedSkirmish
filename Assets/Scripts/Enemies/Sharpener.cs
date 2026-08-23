@@ -25,6 +25,8 @@ public class Sharpener : MonoBehaviour, IEnemy
 
         index = Random.Range(0, 4);
         GetComponent<SpriteRenderer>().sprite = sprites[index];
+
+        lastAttackTime = Time.time - attackCooldown / 2;
     }
 
     void Update()
@@ -33,10 +35,10 @@ public class Sharpener : MonoBehaviour, IEnemy
         {
             lastAttackTime = Time.time;
             Vector2 aimDirection = (target.transform.position - transform.position).normalized;
-            GameObject projectile = Instantiate(this.projectile);
-            projectile.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x)));
-            projectile.transform.Translate(aimDirection, Space.World);
+            GameObject projectile = Instantiate(this.projectile, transform.position, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x)));
             projectile.GetComponent<IProjectile>().Configure(damage, projectileLifetime, projectileSpeed);
+            projectile.GetComponent<IProjectile>().FlipY(GetComponent<SpriteRenderer>().flipX);
+            projectile.transform.Translate(aimDirection, Space.World);
         }
     }
 
