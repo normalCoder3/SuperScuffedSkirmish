@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StartGame : MonoBehaviour
+public class OpenGame : MonoBehaviour
 {
     public void OnMouseDown()
     {
-        SceneManager.LoadScene("Level");
+        SceneManager.LoadScene(1);
     }
 }

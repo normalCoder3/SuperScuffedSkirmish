@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
     {
         if (player == null)
         {
-            Invoke(nameof(Lose), 3);
+            Invoke(nameof(Lose), 1);
         } 
         else
         {
@@ -48,6 +48,7 @@ public class GameController : MonoBehaviour
 
     private void Lose()
     {
+        Cursor.visible = true;
         SceneManager.LoadScene("LossScreen");
     }
 }
