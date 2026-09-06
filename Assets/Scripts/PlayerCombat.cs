@@ -24,7 +24,6 @@ public class PlayerCombat : MonoBehaviour
     public float invincibilityTime;
     private float lastHitTime;
 
-
     void Start()
     {
         crosshair = GameObject.Find("Crosshair");

@@ -36,10 +36,7 @@ public class GameController : MonoBehaviour
                     {
                         break;
                     }
-                    else
-                    {
-                        index++;
-                    }
+                    index++;
                 }
                 indicator.GetComponent<Indicator>().enemy = enemy[index];
             }
