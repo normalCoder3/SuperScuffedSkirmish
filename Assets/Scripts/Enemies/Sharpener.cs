@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class Sharpener : MonoBehaviour, IEnemy
 {
+    private AudioManager audioManager;
     [Header("Configuration")]
     private int index;
     public List<Sprite> sprites;
     [Header("Movement")]
-    private GameObject target;
     public float movementSpeed;
+    private GameObject target;
     [Header("Combat")]
     public float attackCooldown;
     public float damage;
@@ -21,6 +22,7 @@ public class Sharpener : MonoBehaviour, IEnemy
 
     void Start()
     {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         target = GameObject.FindGameObjectWithTag("Player");
 
         index = Random.Range(0, 4);
@@ -69,13 +71,15 @@ public class Sharpener : MonoBehaviour, IEnemy
     {
         if (collision.CompareTag("PlayerProjectile"))
         {
-            health = Mathf.Max(health - collision.GetComponent<IProjectile>().GetDamage(), 0);
+            health = health - collision.GetComponent<IProjectile>().GetDamage();
+            audioManager.PlaySound("hit2");
         }
 
         if (hitEffect && health <= 0)
         {
             Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
             hitEffect = null;
+            audioManager.PlaySound("destroy");
             Destroy(gameObject);
         }
     }

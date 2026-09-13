@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class Crayon : MonoBehaviour, IEnemy
 {
+    private AudioManager audioManager;
     [Header("Configuration")]
     public List<Color> colors;
     private int index;
     public List<Sprite> sprites;
     [Header("Movement")]
-    private GameObject target;
     public float movementSpeed;
+    private GameObject target;
     [Header("Combat")]
     public GameObject projectile;
     public float damage;
@@ -20,7 +21,9 @@ public class Crayon : MonoBehaviour, IEnemy
 
     void Start()
     {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         target = GameObject.FindGameObjectWithTag("Player");
+
         line = Instantiate(projectile, GameObject.Find("Enemies").transform);
         line.GetComponent<CrayonLine>().crayon = gameObject;
         line.GetComponent<IProjectile>().Configure(damage, 0, persistent: true);
@@ -59,7 +62,8 @@ public class Crayon : MonoBehaviour, IEnemy
     {
         if (collision.CompareTag("PlayerProjectile"))
         {
-            health = Mathf.Max(health - collision.GetComponent<IProjectile>().GetDamage(), 0);
+            health = health - collision.GetComponent<IProjectile>().GetDamage();
+            audioManager.PlaySound("hit2");
         }
 
         if (hitEffect && health <= 0)
@@ -68,6 +72,7 @@ public class Crayon : MonoBehaviour, IEnemy
             ParticleSystem.MainModule main = hitParticles.transform.Find("Particles").GetComponent<ParticleSystem>().main;
             main.startColor = colors[index];
             hitEffect = null;
+            audioManager.PlaySound("destroy");
             Destroy(gameObject);
         }
     }

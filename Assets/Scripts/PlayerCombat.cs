@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
 {
+    private AudioManager audioManager;
     private GameObject crosshair;
     private GameObject healthIcon;
     private GameObject weapon;
-    private GameObject virtualCamera;
     [Header("Health")]
     public float health;
     public Sprite healthIconImage;
     public Sprite hurtIconImage;
-    public TMP_Text healthText;
+    [SerializeField]
+    private TMP_Text healthText;
     private float lastRegenTime;
     private float maxHealth;
     public float regenAmount;
@@ -26,9 +27,9 @@ public class PlayerCombat : MonoBehaviour
 
     void Start()
     {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         crosshair = GameObject.Find("Crosshair");
         healthIcon = GameObject.Find("Health Icon");
-        virtualCamera = GameObject.Find("Virtual Camera");
         maxHealth = health;
 
         if (GameObject.FindGameObjectsWithTag("RangedWeapon").Length == 1)
@@ -102,6 +103,11 @@ public class PlayerCombat : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 
+    private void SetWeapon()
+    {
+        // TO DO: Implement weapon switching logic if needed
+    }
+
     private void TakeHit(Collider2D collision)
     {
         if ((collision.CompareTag("EnemyProjectile") || collision.CompareTag("Enemy")) && Time.time - lastHitTime > invincibilityTime)
@@ -121,13 +127,15 @@ public class PlayerCombat : MonoBehaviour
                 healthIcon.GetComponent<Image>().sprite = hurtIconImage;
                 Invoke(nameof(ExitInvincibility), invincibilityTime);
                 Instantiate(hitEffect, transform.position, transform.rotation);
+                audioManager.PlaySound("hit2");
                 UpdateHealth();
             }
 
             if (health <= 0)
             {
                 healthText.color = Color.black;
-                virtualCamera.SetActive(false);
+                audioManager.PlaySound("destroy");
+                GameObject.Find("Virtual Camera").SetActive(false);
                 Destroy(gameObject);
             }
         }

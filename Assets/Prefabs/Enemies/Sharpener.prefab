@@ -225,7 +225,7 @@ MonoBehaviour:
   movementSpeed: 50
   attackCooldown: 3
   damage: 1
-  health: 1
+  health: 2
   hitEffect: {fileID: 6093686801365895455, guid: fa10783d0684bd944b3baa248e22b0fa, type: 3}
   projectile: {fileID: 831977872211496671, guid: 588160586ebcc0f44acb8f456880c352, type: 3}
   projectileLifetime: 3

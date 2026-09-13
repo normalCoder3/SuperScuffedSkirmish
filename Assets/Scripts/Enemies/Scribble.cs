@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class Scribble : MonoBehaviour, IEnemy
 {
+    private AudioManager audioManager;
     [Header("Movement")]
-    private GameObject target;
     public float movementSpeed;
+    private GameObject target;
     [Header("Combat")]
     public float damage;
     public float health;
@@ -12,6 +13,7 @@ public class Scribble : MonoBehaviour, IEnemy
 
     void Start()
     {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         target = GameObject.FindGameObjectWithTag("Player");
     }
     
@@ -42,13 +44,15 @@ public class Scribble : MonoBehaviour, IEnemy
     {
         if (collision.CompareTag("PlayerProjectile"))
         {
-            health = Mathf.Max(health - collision.GetComponent<IProjectile>().GetDamage(), 0);
+            health = health - collision.GetComponent<IProjectile>().GetDamage();
+            audioManager.PlaySound("hit1");
         }
 
         if (hitEffect && health <= 0)
         {
             Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
             hitEffect = null;
+            audioManager.PlaySound("destroy");
             Destroy(gameObject);
         }
     }

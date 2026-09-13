@@ -217,7 +217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00e23a00291400349a04de722b23be76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 5568170869131893410, guid: ff27d20c0f8b1d449bc08ffa453a4ff3, type: 3}
   colors:
   - {r: 1, g: 0.12941177, b: 0.12941177, a: 1}
   - {r: 1, g: 0.50980395, b: 0.20000002, a: 1}
@@ -229,7 +228,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 832a301efcaac7c41a74cf0539b042f0, type: 3}
   - {fileID: 21300000, guid: 3242426848480b047a5d8ce01e53b28b, type: 3}
   movementSpeed: 100
+  projectile: {fileID: 5568170869131893410, guid: ff27d20c0f8b1d449bc08ffa453a4ff3, type: 3}
   damage: 1
-  health: 1
+  health: 2
   hitEffect: {fileID: 6093686801365895455, guid: cbdf9657580a5d04e9fb87178c94bd1e, type: 3}
   lineUpdateInterval: 0.05
