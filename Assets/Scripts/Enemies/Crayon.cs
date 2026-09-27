@@ -45,7 +45,7 @@ public class Crayon : MonoBehaviour, IEnemy
                 GetComponent<SpriteRenderer>().flipX = flip;
             }
 
-            GetComponent<Rigidbody2D>().velocity = movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
+            GetComponent<Rigidbody2D>().velocity = movementSpeed * (target.transform.position - transform.position).normalized;
         }
         else
         {
@@ -53,27 +53,28 @@ public class Crayon : MonoBehaviour, IEnemy
         }
     }
 
-    public float GetDamage()
-    {
-        return damage;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerProjectile"))
         {
-            health = health - collision.GetComponent<IProjectile>().GetDamage();
+            collision.GetComponent<Collider2D>().enabled = false;
+            health -= collision.GetComponent<IProjectile>().GetDamage();
             audioManager.PlaySound("hit2");
-        }
 
-        if (hitEffect && health <= 0)
-        {
-            ParticleSystem hitParticles = Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
-            ParticleSystem.MainModule main = hitParticles.transform.Find("Particles").GetComponent<ParticleSystem>().main;
-            main.startColor = colors[index];
-            hitEffect = null;
-            audioManager.PlaySound("destroy");
-            Destroy(gameObject);
+            if (hitEffect && health <= 0)
+            {
+                ParticleSystem hitParticles = Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
+                ParticleSystem.MainModule main = hitParticles.transform.Find("Particles").GetComponent<ParticleSystem>().main;
+                main.startColor = colors[index];
+                hitEffect = null;
+                audioManager.PlaySound("destroy");
+                Destroy(gameObject);
+            }
         }
+    }
+
+    public float GetDamage()
+    {
+        return damage;
     }
 }

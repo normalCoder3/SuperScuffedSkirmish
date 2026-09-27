@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1553871498491769689}
   - component: {fileID: 6584327929907672921}
+  - component: {fileID: 3378672373981576286}
   - component: {fileID: 7240956677549249046}
   - component: {fileID: 789050131489421601}
   - component: {fileID: 5270261158029106390}
@@ -174,6 +175,33 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!50 &3378672373981576286
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568170869131893410}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!120 &7240956677549249046
 LineRenderer:
   serializedVersion: 2
@@ -406,4 +434,5 @@ MonoBehaviour:
   flipY: 0
   lifetime: 0
   speed: 0
+  hit: 0
   persistent: 0

@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().velocity = Input.GetAxisRaw("Horizontal") == 0 && Input.GetAxisRaw("Vertical") == 0 ? Vector2.zero 
-        : movementSpeed * Time.deltaTime * new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        Vector2 direction = Vector2.ClampMagnitude(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")), 1f);
+        GetComponent<Rigidbody2D>().velocity = movementSpeed * direction;
     }
 }

@@ -24,9 +24,10 @@ public class Eraser : MonoBehaviour, IWeapon
             lastAttackTime = Time.time;
 
             GameObject projectile = Instantiate(this.projectile, transform.position, transform.rotation);
-            projectile.GetComponent<IProjectile>().Configure(damage, lifetime, speed);
             projectile.transform.Translate(aimDirection, Space.World);
+            projectile.GetComponent<IProjectile>().Configure(damage, lifetime);
             projectile.GetComponent<IProjectile>().FlipY(GetComponent<SpriteRenderer>().flipY);
+            projectile.GetComponent<Rigidbody2D>().velocity = speed * aimDirection;
             gameObject.SetActive(false);
             Invoke(nameof(ResetThrowable), attackCooldown * 0.9f);
         }

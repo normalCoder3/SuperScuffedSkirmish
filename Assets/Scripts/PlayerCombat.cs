@@ -127,7 +127,7 @@ public class PlayerCombat : MonoBehaviour
                 healthIcon.GetComponent<Image>().sprite = hurtIconImage;
                 Invoke(nameof(ExitInvincibility), invincibilityTime);
                 Instantiate(hitEffect, transform.position, transform.rotation);
-                audioManager.PlaySound("hit2");
+                audioManager.PlaySound("hit1");
                 UpdateHealth();
             }
 

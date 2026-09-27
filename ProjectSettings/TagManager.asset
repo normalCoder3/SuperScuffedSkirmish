@@ -9,6 +9,7 @@ TagManager:
   - EnemyProjectile
   - RangedWeapon
   - MeleeWeapon
+  - Projectile
   layers:
   - Default
   - TransparentFX

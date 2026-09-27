@@ -38,8 +38,9 @@ public class Sharpener : MonoBehaviour, IEnemy
             lastAttackTime = Time.time;
             Vector2 aimDirection = (target.transform.position - transform.position).normalized;
             GameObject projectile = Instantiate(this.projectile, transform.position, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x)));
-            projectile.GetComponent<IProjectile>().Configure(damage, projectileLifetime, projectileSpeed);
+            projectile.GetComponent<IProjectile>().Configure(damage, projectileLifetime);
             projectile.GetComponent<IProjectile>().FlipY(GetComponent<SpriteRenderer>().flipX);
+            projectile.GetComponent<Rigidbody2D>().velocity = projectileSpeed * aimDirection;
             projectile.transform.Translate(aimDirection, Space.World);
         }
     }
@@ -53,7 +54,7 @@ public class Sharpener : MonoBehaviour, IEnemy
                 GetComponent<SpriteRenderer>().flipX = flip;
             }
 
-            GetComponent<Rigidbody2D>().velocity = movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
+            GetComponent<Rigidbody2D>().velocity = movementSpeed * (target.transform.position - transform.position).normalized;
         }
         else
         {
@@ -61,26 +62,25 @@ public class Sharpener : MonoBehaviour, IEnemy
         }
     }
 
-
-    public float GetDamage()
-    {
-        return damage;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerProjectile"))
         {
-            health = health - collision.GetComponent<IProjectile>().GetDamage();
+            health -= collision.GetComponent<IProjectile>().GetDamage();
             audioManager.PlaySound("hit2");
-        }
 
-        if (hitEffect && health <= 0)
-        {
-            Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
-            hitEffect = null;
-            audioManager.PlaySound("destroy");
-            Destroy(gameObject);
+            if (hitEffect && health <= 0)
+            {
+                Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
+                hitEffect = null;
+                audioManager.PlaySound("destroy");
+                Destroy(gameObject);
+            }
         }
+    }
+
+    public float GetDamage()
+    {
+        return damage;
     }
 }

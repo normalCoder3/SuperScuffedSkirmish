@@ -17,13 +17,13 @@ public class Slash : MonoBehaviour, IProjectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!persistent && !tag.Contains(collision.tag))
+        if (!persistent || tag.Contains(collision.tag) && !tag.Contains("Projectile"))
         {
             Destroy(GetComponent<BoxCollider2D>());
         }
     }
 
-    public void Configure(float damage, float lifetime, float speed, bool persistent)
+    public void Configure(float damage, float lifetime, bool persistent)
     {
         this.damage = damage;
         this.lifetime = lifetime;

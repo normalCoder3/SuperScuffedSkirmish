@@ -16,7 +16,7 @@ public class Scribble : MonoBehaviour, IEnemy
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         target = GameObject.FindGameObjectWithTag("Player");
     }
-    
+
     void FixedUpdate()
     {
         if (target != null)
@@ -27,7 +27,7 @@ public class Scribble : MonoBehaviour, IEnemy
                 GetComponent<SpriteRenderer>().flipX = flip;
             }
 
-            GetComponent<Rigidbody2D>().velocity = movementSpeed * Time.deltaTime * (target.transform.position - transform.position).normalized;
+            GetComponent<Rigidbody2D>().velocity = movementSpeed * (target.transform.position - transform.position).normalized;
         }
         else
         {
@@ -35,25 +35,26 @@ public class Scribble : MonoBehaviour, IEnemy
         }
     }
 
-    public float GetDamage()
-    {
-        return damage;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerProjectile"))
         {
-            health = health - collision.GetComponent<IProjectile>().GetDamage();
+            collision.GetComponent<Collider2D>().enabled = false;
+            health -= collision.GetComponent<IProjectile>().GetDamage();
             audioManager.PlaySound("hit1");
-        }
 
-        if (hitEffect && health <= 0)
-        {
-            Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
-            hitEffect = null;
-            audioManager.PlaySound("destroy");
-            Destroy(gameObject);
+            if (hitEffect && health <= 0)
+            {
+                Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
+                hitEffect = null;
+                audioManager.PlaySound("destroy");
+                Destroy(gameObject);
+            }
         }
+    }
+
+    public float GetDamage()
+    {
+        return damage;
     }
 }

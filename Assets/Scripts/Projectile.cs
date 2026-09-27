@@ -5,7 +5,6 @@ public class Projectile : MonoBehaviour, IProjectile
     public float damage;
     public bool flipY;
     public float lifetime;
-    public float speed;
     public bool persistent;
 
     void Start()
@@ -16,24 +15,18 @@ public class Projectile : MonoBehaviour, IProjectile
         }
     }
 
-    void FixedUpdate()
-    {
-        transform.Translate(speed * Time.deltaTime * Vector2.right);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!persistent && !tag.Contains(collision.tag))
+        if (!persistent || tag.Contains(collision.tag) && !tag.Contains("Projectile"))
         {
             Destroy(gameObject);
         }
     }
 
-    public void Configure(float damage, float lifetime, float speed, bool persistent)
+    public void Configure(float damage, float lifetime, bool persistent)
     {
         this.damage = damage;
         this.lifetime = lifetime;
-        this.speed = speed;
         this.persistent = persistent;
     }
 
