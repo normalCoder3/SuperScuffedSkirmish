@@ -25,7 +25,7 @@ public class Pencil : MonoBehaviour, IWeapon
             GameObject slash = Instantiate(this.slash, transform.position, transform.rotation);
             slash.transform.Translate(aimDirection, Space.World);
             slash.GetComponent<IProjectile>().Configure(damage, lifetime);
-            GetComponent<SpriteRenderer>().flipY = !GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX;
+            GetComponent<SpriteRenderer>().flipY = !transform.parent.GetComponent<SpriteRenderer>().flipX;
             Invoke(nameof(ResetMelee), attackCooldown / 2);
         }
     }
@@ -37,6 +37,6 @@ public class Pencil : MonoBehaviour, IWeapon
 
     private void ResetMelee()
     {
-        GetComponent<SpriteRenderer>().flipY = GameObject.FindGameObjectWithTag("Player").GetComponent<SpriteRenderer>().flipX;
+        GetComponent<SpriteRenderer>().flipY = transform.parent.GetComponent<SpriteRenderer>().flipX;
     }
 }

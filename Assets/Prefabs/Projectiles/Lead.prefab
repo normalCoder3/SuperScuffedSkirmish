@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3651432050937895116}
   - component: {fileID: -601413850470296846}
   - component: {fileID: 5314137891357417333}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lead
   m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &5314137891357417333
 MonoBehaviour:
@@ -174,5 +174,4 @@ MonoBehaviour:
   damage: 0
   flipY: 0
   lifetime: 0
-  hit: 0
   persistent: 0

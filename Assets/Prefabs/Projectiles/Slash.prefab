@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4019441252217749576}
   - component: {fileID: -5542406306583698574}
   - component: {fileID: -4291124950201509343}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slash
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
@@ -174,5 +174,4 @@ MonoBehaviour:
   damage: 0
   flipY: 0
   lifetime: 0
-  hit: 0
   persistent: 0

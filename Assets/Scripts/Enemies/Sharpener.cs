@@ -39,7 +39,7 @@ public class Sharpener : MonoBehaviour, IEnemy
             Vector2 aimDirection = (target.transform.position - transform.position).normalized;
             GameObject projectile = Instantiate(this.projectile, transform.position, Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x)));
             projectile.GetComponent<IProjectile>().Configure(damage, projectileLifetime);
-            projectile.GetComponent<IProjectile>().FlipY(GetComponent<SpriteRenderer>().flipX);
+            projectile.GetComponent<SpriteRenderer>().flipY = GetComponent<SpriteRenderer>().flipY;
             projectile.GetComponent<Rigidbody2D>().velocity = projectileSpeed * aimDirection;
             projectile.transform.Translate(aimDirection, Space.World);
         }

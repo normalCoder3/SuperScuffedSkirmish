@@ -57,7 +57,6 @@ public class Crayon : MonoBehaviour, IEnemy
     {
         if (collision.CompareTag("PlayerProjectile"))
         {
-            collision.GetComponent<Collider2D>().enabled = false;
             health -= collision.GetComponent<IProjectile>().GetDamage();
             audioManager.PlaySound("hit2");
 

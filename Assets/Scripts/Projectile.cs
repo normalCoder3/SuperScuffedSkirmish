@@ -3,7 +3,6 @@ using UnityEngine;
 public class Projectile : MonoBehaviour, IProjectile
 {
     public float damage;
-    public bool flipY;
     public float lifetime;
     public bool persistent;
 
@@ -17,7 +16,7 @@ public class Projectile : MonoBehaviour, IProjectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!persistent || tag.Contains(collision.tag) && !tag.Contains("Projectile"))
+        if (!persistent && !tag.Contains(collision.tag))
         {
             Destroy(gameObject);
         }
@@ -33,11 +32,6 @@ public class Projectile : MonoBehaviour, IProjectile
     public void Destroy()
     {
         Destroy(gameObject);
-    }
-
-    public void FlipY(bool flip)
-    {
-        GetComponent<SpriteRenderer>().flipY = flip;
     }
 
     public float GetDamage()

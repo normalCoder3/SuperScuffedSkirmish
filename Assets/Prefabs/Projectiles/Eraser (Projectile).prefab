@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2561198696511402396}
   - component: {fileID: -6784814414331280445}
   - component: {fileID: 8727750115599456653}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Eraser (Projectile)
   m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &8727750115599456653
 MonoBehaviour:
@@ -174,5 +174,4 @@ MonoBehaviour:
   damage: 0
   flipY: 0
   lifetime: 0
-  hit: 0
   persistent: 0

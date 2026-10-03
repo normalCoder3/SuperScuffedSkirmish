@@ -3,7 +3,6 @@ using UnityEngine;
 public class Slash : MonoBehaviour, IProjectile
 {
     public float damage;
-    public bool flipY;
     public float lifetime;
     public bool persistent;
 
@@ -33,11 +32,6 @@ public class Slash : MonoBehaviour, IProjectile
     public void Destroy()
     {
         Destroy(gameObject);
-    }
-
-    public void FlipY(bool flip)
-    {
-        GetComponent<SpriteRenderer>().flipY = flip;
     }
 
     public float GetDamage()

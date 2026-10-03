@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7240956677549249046}
   - component: {fileID: 789050131489421601}
   - component: {fileID: 5270261158029106390}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Crayon Line
   m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
@@ -433,6 +433,4 @@ MonoBehaviour:
   damage: 0
   flipY: 0
   lifetime: 0
-  speed: 0
-  hit: 0
   persistent: 0
