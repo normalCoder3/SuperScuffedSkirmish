@@ -7,14 +7,14 @@ public class PlayerCombat : MonoBehaviour
 {
     private AudioManager audioManager;
     private GameObject crosshair;
+    private GameController gameController;
     private GameObject healthIcon;
     private GameObject weapon;
     [Header("Health")]
     public float health;
     public Sprite healthIconImage;
     public Sprite hurtIconImage;
-    [SerializeField]
-    private TMP_Text healthText;
+    public TMP_Text healthText;
     private float lastRegenTime;
     private float maxHealth;
     public float regenAmount;
@@ -24,11 +24,13 @@ public class PlayerCombat : MonoBehaviour
     public ParticleSystem hitEffect;
     public float invincibilityTime;
     private float lastHitTime;
+    public int scoreDeduction;
 
     void Start()
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         crosshair = GameObject.Find("Crosshair");
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
         healthIcon = GameObject.Find("Health Icon");
         maxHealth = health;
 
@@ -46,7 +48,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
-        Vector2 aimDirection = (crosshair.transform.position - weapon.transform.position).normalized;
+        Vector2 aimDirection = (crosshair.transform.position - weapon.transform.position).normalized; 
 
         if (crosshair.GetComponent<SpriteRenderer>().sprite.name == "meleeCrosshair")
         {
@@ -127,6 +129,7 @@ public class PlayerCombat : MonoBehaviour
                 healthIcon.GetComponent<Image>().sprite = hurtIconImage;
                 Invoke(nameof(ExitInvincibility), invincibilityTime);
                 Instantiate(hitEffect, transform.position, transform.rotation);
+                gameController.UpdateScore(scoreDeduction);
                 audioManager.PlaySound("hit1");
                 UpdateHealth();
             }

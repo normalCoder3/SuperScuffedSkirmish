@@ -187,3 +187,4 @@ MonoBehaviour:
   health: 2
   hitEffect: {fileID: 6093686801365895455, guid: cbdf9657580a5d04e9fb87178c94bd1e, type: 3}
   lineUpdateInterval: 0.05
+  scoreValue: 200

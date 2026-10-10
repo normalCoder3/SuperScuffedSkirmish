@@ -4,6 +4,7 @@ using UnityEngine;
 public class Crayon : MonoBehaviour, IEnemy
 {
     private AudioManager audioManager;
+    private GameController gameController;
     [Header("Configuration")]
     public List<Color> colors;
     private int index;
@@ -18,10 +19,13 @@ public class Crayon : MonoBehaviour, IEnemy
     public ParticleSystem hitEffect;
     private GameObject line;
     public float lineUpdateInterval;
+    public int scoreValue;
+    public float GetDamage() => damage;
 
     void Start()
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
         target = GameObject.FindGameObjectWithTag("Player");
 
         line = Instantiate(projectile, GameObject.Find("Enemies").transform);
@@ -58,22 +62,17 @@ public class Crayon : MonoBehaviour, IEnemy
         if (collision.CompareTag("PlayerProjectile"))
         {
             health -= collision.GetComponent<IProjectile>().GetDamage();
+            ParticleSystem hitParticles = Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
+            ParticleSystem.MainModule main = hitParticles.transform.Find("Particles").GetComponent<ParticleSystem>().main;
+            main.startColor = colors[index];
             audioManager.PlaySound("hit2");
 
-            if (hitEffect && health <= 0)
+            if (health <= 0)
             {
-                ParticleSystem hitParticles = Instantiate(hitEffect, transform.position, transform.rotation, GameObject.Find("Enemies").transform);
-                ParticleSystem.MainModule main = hitParticles.transform.Find("Particles").GetComponent<ParticleSystem>().main;
-                main.startColor = colors[index];
-                hitEffect = null;
+                gameController.UpdateScore(scoreValue);
                 audioManager.PlaySound("destroy");
                 Destroy(gameObject);
             }
         }
-    }
-
-    public float GetDamage()
-    {
-        return damage;
     }
 }

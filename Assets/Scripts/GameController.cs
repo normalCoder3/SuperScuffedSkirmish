@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,10 +9,13 @@ public class GameController : MonoBehaviour
     private GameObject player;
     public float spawnCooldown;
     private float lastSpawnTime;
+    public int score;
+    public TMP_Text scoreText;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        scoreText.text = "0";
     }
 
     void Update()
@@ -47,5 +51,11 @@ public class GameController : MonoBehaviour
     {
         Cursor.visible = true;
         SceneManager.LoadScene("LossScreen");
+    }
+
+    public void UpdateScore(int change)
+    {
+        score += change;
+        scoreText.text = score.ToString();
     }
 }

@@ -184,3 +184,4 @@ MonoBehaviour:
   projectile: {fileID: 831977872211496671, guid: 588160586ebcc0f44acb8f456880c352, type: 3}
   projectileLifetime: 3
   projectileSpeed: 5
+  scoreValue: 300

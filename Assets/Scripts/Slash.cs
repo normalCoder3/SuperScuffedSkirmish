@@ -5,6 +5,7 @@ public class Slash : MonoBehaviour, IProjectile
     public float damage;
     public float lifetime;
     public bool persistent;
+    public float GetDamage() => damage;
 
     void Start()
     {
@@ -32,10 +33,5 @@ public class Slash : MonoBehaviour, IProjectile
     public void Destroy()
     {
         Destroy(gameObject);
-    }
-
-    public float GetDamage()
-    {
-        return damage;
     }
 }
