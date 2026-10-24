@@ -4,18 +4,19 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject indicator;
     public GameObject[] enemy;
-    private GameObject player;
-    public float spawnCooldown;
+    public GameObject indicator;
     private float lastSpawnTime;
+    private float lastScoreTime;
+    private GameObject player;
     public int score;
+    public int scoreInterval;
     public TMP_Text scoreText;
+    public float spawnCooldown;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        scoreText.text = "0";
     }
 
     void Update()
@@ -26,7 +27,14 @@ public class GameController : MonoBehaviour
         } 
         else
         {
-            if (Time.time - lastSpawnTime > spawnCooldown && player.activeInHierarchy)
+            if (Time.time - lastScoreTime > scoreInterval)
+            {
+                lastScoreTime = Time.time;
+                UpdateScore(100);
+                //Debug.Log(Time.time + " " + spawnCooldown * Mathf.Pow(0.999952f, Mathf.Pow(Time.time, 2)));
+            }
+
+            if ((Time.time - lastSpawnTime > spawnCooldown * Mathf.Pow(0.9999f, Mathf.Pow(Time.time, 2))) && player.activeInHierarchy)
             {
                 lastSpawnTime = Time.time;
 
@@ -36,7 +44,7 @@ public class GameController : MonoBehaviour
                 int index = 0;
                 for (int i = 0; i < enemy.Length - 1; i++)
                 {
-                    if (Random.Range(1, 3) == 1)
+                    if (Random.Range(1, enemy.Length) == 1)
                     {
                         break;
                     }

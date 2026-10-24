@@ -13,8 +13,8 @@ public class PlayerCombat : MonoBehaviour
     [Header("Health")]
     public float health;
     public Sprite healthIconImage;
-    public Sprite hurtIconImage;
     public TMP_Text healthText;
+    public Sprite hurtIconImage;
     private float lastRegenTime;
     private float maxHealth;
     public float regenAmount;
@@ -24,7 +24,7 @@ public class PlayerCombat : MonoBehaviour
     public ParticleSystem hitEffect;
     public float invincibilityTime;
     private float lastHitTime;
-    public int scoreDeduction;
+    public int hitScoreDeduction;
 
     void Start()
     {
@@ -129,7 +129,7 @@ public class PlayerCombat : MonoBehaviour
                 healthIcon.GetComponent<Image>().sprite = hurtIconImage;
                 Invoke(nameof(ExitInvincibility), invincibilityTime);
                 Instantiate(hitEffect, transform.position, transform.rotation);
-                gameController.UpdateScore(scoreDeduction);
+                gameController.UpdateScore(hitScoreDeduction);
                 audioManager.PlaySound("hit1");
                 UpdateHealth();
             }

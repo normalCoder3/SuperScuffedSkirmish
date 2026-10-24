@@ -3,9 +3,9 @@ using UnityEngine;
 public class Eraser : MonoBehaviour, IWeapon
 {
     [Header("Projectile")]
-    public GameObject projectile;
     public float damage;
     public float lifetime;
+    public GameObject projectile;
     public float speed;
     [Header("Combat")]
     public float attackCooldown;

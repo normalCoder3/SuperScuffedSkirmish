@@ -13,12 +13,12 @@ public class Crayon : MonoBehaviour, IEnemy
     public float movementSpeed;
     private GameObject target;
     [Header("Combat")]
-    public GameObject projectile;
     public float damage;
     public float health;
     public ParticleSystem hitEffect;
     private GameObject line;
     public float lineUpdateInterval;
+    public GameObject projectile;
     public int scoreValue;
     public float GetDamage() => damage;
 
