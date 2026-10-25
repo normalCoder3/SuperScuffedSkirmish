@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - meleeCrosshair: {fileID: 21300000, guid: ee4e073c5bf56aa4db5fd56626e3f448, type: 3}
   - rangedCrosshair: {fileID: 21300000, guid: caa1a0442f241624a9a4912d044d9cea, type: 3}
-  executionOrder: 0
+  executionOrder: 300
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

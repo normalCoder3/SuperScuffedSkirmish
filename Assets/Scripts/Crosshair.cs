@@ -4,6 +4,7 @@ public class Crosshair : MonoBehaviour
 {
     public Sprite meleeCrosshair;
     public Sprite rangedCrosshair;
+    private Vector3 velocity = Vector3.zero;
 
 
     void Start()
@@ -11,12 +12,15 @@ public class Crosshair : MonoBehaviour
         Cursor.visible = false;
     }
 
-    void Update()
+    void LateUpdate()
     {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (mousePosition.x != Input.mousePosition.x || mousePosition.y != Input.mousePosition.y)
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        Plane plane = new(Vector3.forward, new Vector3(0f, 0f, transform.position.z));
+
+        if (plane.Raycast(ray, out float distance))
         {
-            transform.position = mousePosition;
+            transform.position = ray.GetPoint(distance);
         }
     }
 

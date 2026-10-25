@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,8 @@ public class PlayerCombat : MonoBehaviour
     public float invincibilityTime;
     private float lastHitTime;
     public int hitScoreDeduction;
+    [Header("Weapons")]
+    public GameObject[] weapons;
 
     void Start()
     {
@@ -34,6 +37,7 @@ public class PlayerCombat : MonoBehaviour
         healthIcon = GameObject.Find("Health Icon");
         maxHealth = health;
 
+        SetWeapon();
         if (GameObject.FindGameObjectsWithTag("RangedWeapon").Length == 1)
         {
             weapon = GameObject.FindGameObjectWithTag("RangedWeapon");
@@ -107,7 +111,16 @@ public class PlayerCombat : MonoBehaviour
 
     private void SetWeapon()
     {
-        // TO DO: Implement weapon switching logic if needed
+        foreach (GameObject gameobject in weapons)
+        {
+            if (GameData.weapon == gameobject.name)
+            {
+                weapon = Instantiate(gameobject, transform);
+                return;
+            }
+
+            Instantiate(weapons[0], transform);
+        }
     }
 
     private void TakeHit(Collider2D collision)
@@ -138,7 +151,8 @@ public class PlayerCombat : MonoBehaviour
             {
                 healthText.color = Color.black;
                 audioManager.PlaySound("destroy");
-                GameObject.Find("Virtual Camera").SetActive(false);
+                Camera.main.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.SetActive(false);
+                Camera.main.GetComponent<AudioSource>().Stop();
                 Destroy(gameObject);
             }
         }

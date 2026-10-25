@@ -31,7 +31,6 @@ public class GameController : MonoBehaviour
             {
                 lastScoreTime = Time.time;
                 UpdateScore(100);
-                //Debug.Log(Time.time + " " + spawnCooldown * Mathf.Pow(0.999952f, Mathf.Pow(Time.time, 2)));
             }
 
             if ((Time.time - lastSpawnTime > spawnCooldown * Mathf.Pow(0.9999f, Mathf.Pow(Time.time, 2))) && player.activeInHierarchy)
@@ -57,6 +56,7 @@ public class GameController : MonoBehaviour
 
     private void Lose()
     {
+        GameData.score = score;
         Cursor.visible = true;
         SceneManager.LoadScene("LossScreen");
     }
