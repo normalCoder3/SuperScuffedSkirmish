@@ -26,11 +26,7 @@ public class Scribble : MonoBehaviour, IEnemy
         if (target != null)
         {
             bool flip = (target.transform.position - transform.position).x < 0;
-            if (GetComponent<SpriteRenderer>().flipX != flip)
-            {
-                GetComponent<SpriteRenderer>().flipX = flip;
-            }
-
+            if (GetComponent<SpriteRenderer>().flipX != flip) GetComponent<SpriteRenderer>().flipX = flip;
             GetComponent<Rigidbody2D>().velocity = movementSpeed * (target.transform.position - transform.position).normalized;
         }
         else

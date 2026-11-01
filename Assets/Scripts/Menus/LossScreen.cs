@@ -4,8 +4,8 @@ using UnityEngine;
 public class LossScreen : MonoBehaviour
 {
     public GameObject deathMessage;
-    public GameObject scoreText;
     public string[] messages;
+    public GameObject scoreText;
 
     void Start()
     {

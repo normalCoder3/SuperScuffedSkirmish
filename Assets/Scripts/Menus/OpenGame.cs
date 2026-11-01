@@ -7,7 +7,7 @@ public class OpenGame : MonoBehaviour
     {
         GameData.score = 0;
         gameObject.GetComponent<AudioSource>().Play();
-        WaitForSeconds pause = new(1);
+        new WaitForSeconds(1);
         SceneManager.LoadScene(1);
     }
 }

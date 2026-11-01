@@ -4,7 +4,6 @@ public class Crosshair : MonoBehaviour
 {
     public Sprite meleeCrosshair;
     public Sprite rangedCrosshair;
-    private Vector3 velocity = Vector3.zero;
 
 
     void Start()
@@ -15,13 +14,8 @@ public class Crosshair : MonoBehaviour
     void LateUpdate()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         Plane plane = new(Vector3.forward, new Vector3(0f, 0f, transform.position.z));
-
-        if (plane.Raycast(ray, out float distance))
-        {
-            transform.position = ray.GetPoint(distance);
-        }
+        if (plane.Raycast(ray, out float distance)) transform.position = ray.GetPoint(distance); ;
     }
 
     public void SetMelee()

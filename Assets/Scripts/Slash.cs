@@ -9,18 +9,12 @@ public class Slash : MonoBehaviour, IProjectile
 
     void Start()
     {
-        if (lifetime > 0)
-        {
-            Invoke(nameof(Destroy), lifetime);
-        }
+        if (lifetime > 0) Invoke(nameof(Destroy), lifetime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!persistent || tag.Contains(collision.tag) && !tag.Contains("Projectile"))
-        {
-            Destroy(GetComponent<BoxCollider2D>());
-        }
+        if (!persistent || tag.Contains(collision.tag) && !tag.Contains("Projectile")) Destroy(GetComponent<BoxCollider2D>());
     }
 
     public void Configure(float damage, float lifetime, bool persistent)

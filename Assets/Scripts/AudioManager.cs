@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
         public AudioClip clip;
     }
 
-    public AudioSource source;
+    private AudioSource source;
     [SerializeField] private List<AudioEntry> audioList = new();
     private readonly Dictionary<string, AudioClip> dictionary = new();
 

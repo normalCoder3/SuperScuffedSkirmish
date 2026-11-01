@@ -37,7 +37,7 @@ public class PlayerCombat : MonoBehaviour
         healthIcon = GameObject.Find("Health Icon");
         maxHealth = health;
 
-        SetWeapon();
+        SetWeapon(GameData.weaponIndex);
         if (GameObject.FindGameObjectsWithTag("RangedWeapon").Length == 1)
         {
             weapon = GameObject.FindGameObjectWithTag("RangedWeapon");
@@ -73,14 +73,8 @@ public class PlayerCombat : MonoBehaviour
 
         weapon.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x));
 
-        if (Input.GetMouseButton(0))
-        {
-            weapon.GetComponent<IWeapon>().M1(aimDirection);
-        }
-        if (Input.GetMouseButton(1))
-        {
-            weapon.GetComponent<IWeapon>().M2(aimDirection);
-        }
+        if (Input.GetMouseButton(0)) weapon.GetComponent<IWeapon>().M1(aimDirection);
+        if (Input.GetMouseButton(1)) weapon.GetComponent<IWeapon>().M2(aimDirection);
 
         if (health < maxHealth && Time.time - lastHitTime > regenDowntime)
         {
@@ -109,17 +103,16 @@ public class PlayerCombat : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 
-    private void SetWeapon()
+    private void SetWeapon(int index)
     {
-        foreach (GameObject gameobject in weapons)
+        if (weapon != null) Destroy(weapon);
+        try
         {
-            if (GameData.weapon == gameobject.name)
-            {
-                weapon = Instantiate(gameobject, transform);
-                return;
-            }
-
-            Instantiate(weapons[0], transform);
+            weapon = Instantiate(weapons[index], transform);
+        }
+        catch
+        {
+            weapon = Instantiate(weapons[0], transform);
         }
     }
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Indicator : MonoBehaviour
+public class EnemyIndicator : MonoBehaviour
 {
     public GameObject enemy;
 

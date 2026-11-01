@@ -10563,8 +10563,8 @@ MonoBehaviour:
   invincibilityTime: 1
   hitScoreDeduction: -500
   weapons:
-  - {fileID: 616859959081630232, guid: 128071393bdb40949aca377022d88d88, type: 3}
   - {fileID: 7306586771928918693, guid: cb0670d4612ae0c47ad86b36f96b19cd, type: 3}
+  - {fileID: 616859959081630232, guid: 128071393bdb40949aca377022d88d88, type: 3}
 --- !u!50 &896316670
 Rigidbody2D:
   serializedVersion: 4
@@ -11810,7 +11810,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90af6bd49f9e71440be1eedd6c201eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
   audioList:
   - name: destroy
     clip: {fileID: 8300000, guid: 0d8bfad37dfa3f149a92d996c9554251, type: 3}
@@ -11879,9 +11878,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Frankie
 
-    May 4, 2026
+    Nov. 1, 2026
 
-    (:'
+    :)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

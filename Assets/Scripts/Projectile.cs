@@ -9,18 +9,12 @@ public class Projectile : MonoBehaviour, IProjectile
 
     void Start()
     {
-        if (lifetime > 0)
-        {
-            Invoke(nameof(Destroy), lifetime);
-        }
+        if (lifetime > 0) Invoke(nameof(Destroy), lifetime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!persistent && !tag.Contains(collision.tag))
-        {
-            Destroy(gameObject);
-        }
+        if (!persistent && !tag.Contains(collision.tag)) Destroy(gameObject);
     }
 
     public void Configure(float damage, float lifetime, bool persistent)

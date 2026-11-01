@@ -13,10 +13,12 @@ public class GameController : MonoBehaviour
     public int scoreInterval;
     public TMP_Text scoreText;
     public float spawnCooldown;
+    private float startTime;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        startTime = Time.time;
     }
 
     void Update()
@@ -33,7 +35,7 @@ public class GameController : MonoBehaviour
                 UpdateScore(100);
             }
 
-            if ((Time.time - lastSpawnTime > spawnCooldown * Mathf.Pow(0.9999f, Mathf.Pow(Time.time, 2))) && player.activeInHierarchy)
+            if ((Time.time - lastSpawnTime > spawnCooldown * Mathf.Pow(0.9999f, Mathf.Pow(Time.time - startTime, 2))) && player.activeInHierarchy)
             {
                 lastSpawnTime = Time.time;
 
@@ -43,13 +45,10 @@ public class GameController : MonoBehaviour
                 int index = 0;
                 for (int i = 0; i < enemy.Length - 1; i++)
                 {
-                    if (Random.Range(1, enemy.Length) == 1)
-                    {
-                        break;
-                    }
+                    if (Random.Range(1, enemy.Length) == 1) break;
                     index++;
                 }
-                indicator.GetComponent<Indicator>().enemy = enemy[index];
+                indicator.GetComponent<EnemyIndicator>().enemy = enemy[index];
             }
         }
     }
