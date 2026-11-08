@@ -30,10 +30,7 @@ public class Pencil : MonoBehaviour, IWeapon
         }
     }
 
-    public void M2(Vector2 aimDirection)
-    {
-        Debug.Log(name + " has no M2 ability!");
-    }
+    public void M2(Vector2 aimDirection) { }
 
     private void ResetMelee()
     {

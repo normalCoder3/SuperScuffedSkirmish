@@ -7,7 +7,11 @@ public class OpenTitleScreen : MonoBehaviour
     {
         GameData.weaponIndex = 0;
         gameObject.GetComponent<AudioSource>().Play();
-        new WaitForSeconds(1);
-        SceneManager.LoadScene(0);
+        Invoke(nameof(LoadTitleScreen), GetComponent<AudioSource>().clip.length);
+    }
+
+    private void LoadTitleScreen()
+    {
+        SceneManager.LoadScene("TitleScreen");
     }
 }

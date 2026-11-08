@@ -1,14 +1,34 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Crosshair : MonoBehaviour
 {
     public Sprite meleeCrosshair;
+    public GameObject player;
     public Sprite rangedCrosshair;
-
+    public SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        Cursor.visible = false;
+        player = GameObject.FindGameObjectWithTag("Player");
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        UnityEngine.Cursor.visible = false;
+    }
+
+    void Update()
+    {
+        if (player != null)
+        {
+            if (spriteRenderer.sprite.name == "meleeCrosshair")
+            {
+                Vector2 aimDirection = (transform.position - player.transform.position).normalized;
+                transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x));
+            }
+            else if (transform.rotation.z != 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+        }
     }
 
     void LateUpdate()

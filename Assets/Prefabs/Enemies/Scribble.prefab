@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7880119498503122580}
   - component: {fileID: 7868625228403143625}
   - component: {fileID: 3043011325467993520}
+  - component: {fileID: 2909032919766077451}
   m_Layer: 0
   m_Name: Scribble
   m_TagString: Enemy
@@ -188,3 +189,16 @@ MonoBehaviour:
   health: 1
   hitEffect: {fileID: 6093686801365895455, guid: 049c5b686e55e414a81e306d4c5c475a, type: 3}
   scoreValue: 100
+--- !u!114 &2909032919766077451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4800093658211052103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd10c4ae87dbc8d48aee3669772806d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 2

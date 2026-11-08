@@ -7,7 +7,11 @@ public class OpenGame : MonoBehaviour
     {
         GameData.score = 0;
         gameObject.GetComponent<AudioSource>().Play();
-        new WaitForSeconds(1);
-        SceneManager.LoadScene(1);
+        Invoke(nameof(LoadGame), GetComponent<AudioSource>().clip.length);
+    }
+
+    private void LoadGame()
+    {
+        SceneManager.LoadScene("Game");
     }
 }

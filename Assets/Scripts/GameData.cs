@@ -1,5 +1,5 @@
 public static class GameData
 {
-    public static int score;
-    public static int weaponIndex;
+    public static int score = 0;
+    public static int weaponIndex = 0;
 }

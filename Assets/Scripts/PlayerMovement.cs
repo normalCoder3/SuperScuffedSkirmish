@@ -3,9 +3,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed;
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().velocity = movementSpeed * Vector2.ClampMagnitude(new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")), 1f);
+        rb.velocity = movementSpeed * Vector2.ClampMagnitude(new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")), 1f);
     }
 }

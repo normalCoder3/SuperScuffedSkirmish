@@ -658,7 +658,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathMessage: {fileID: 591944224}
-  scoreText: {fileID: 78116817}
   messages:
   - Couldn't be me
   - You lost in a black (well, gold) belt project?
@@ -685,6 +684,7 @@ MonoBehaviour:
   - IS THAT THE GRIM REAPER?!?!!1
   - Are you on "break" right now
   - Nerf sharpeners
+  scoreText: {fileID: 78116817}
 --- !u!1 &591944224
 GameObject:
   m_ObjectHideFlags: 0
@@ -9239,7 +9239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.5, b: 0.5, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

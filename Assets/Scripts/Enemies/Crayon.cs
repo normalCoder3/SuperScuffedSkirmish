@@ -3,15 +3,12 @@ using UnityEngine;
 
 public class Crayon : MonoBehaviour, IEnemy
 {
+    [Header("Setup")]
     private AudioManager audioManager;
-    private GameController gameController;
-    [Header("Configuration")]
     public List<Color> colors;
+    private GameController gameController;
     private int index;
     public List<Sprite> sprites;
-    [Header("Movement")]
-    public float movementSpeed;
-    private GameObject target;
     [Header("Combat")]
     public float damage;
     public float health;
@@ -26,7 +23,6 @@ public class Crayon : MonoBehaviour, IEnemy
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        target = GameObject.FindGameObjectWithTag("Player");
 
         line = Instantiate(projectile, GameObject.Find("Enemies").transform);
         line.GetComponent<CrayonLine>().crayon = gameObject;
@@ -37,20 +33,6 @@ public class Crayon : MonoBehaviour, IEnemy
         GetComponent<SpriteRenderer>().sprite = sprites[index];
         line.GetComponent<LineRenderer>().startColor = colors[index];
         line.GetComponent<LineRenderer>().endColor = colors[index];
-    }
-
-    void FixedUpdate()
-    {
-        if (target != null)
-        {
-            bool flip = (target.transform.position - transform.position).x < 0;
-            if (GetComponent<SpriteRenderer>().flipX != flip) GetComponent<SpriteRenderer>().flipX = flip;
-            GetComponent<Rigidbody2D>().velocity = movementSpeed * (target.transform.position - transform.position).normalized;
-        }
-        else
-        {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

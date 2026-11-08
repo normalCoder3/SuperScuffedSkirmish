@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class Sharpener : MonoBehaviour, IEnemy
 {
+    [Header("Setup")]
     private AudioManager audioManager;
     private GameController gameController;
-    [Header("Configuration")]
     private int index;
     public List<Sprite> sprites;
-    [Header("Movement")]
-    public float movementSpeed;
     private GameObject target;
     [Header("Combat")]
     public float attackCooldown;
@@ -27,7 +25,7 @@ public class Sharpener : MonoBehaviour, IEnemy
     {
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        target = GameObject.FindGameObjectWithTag("Player");
+        target = GetComponent<DefaultEnemyTracking>().target;
 
         index = Random.Range(0, 4);
         GetComponent<SpriteRenderer>().sprite = sprites[index];
@@ -46,19 +44,6 @@ public class Sharpener : MonoBehaviour, IEnemy
             projectile.GetComponent<SpriteRenderer>().flipY = GetComponent<SpriteRenderer>().flipY;
             projectile.GetComponent<Rigidbody2D>().velocity = projectileSpeed * aimDirection;
             projectile.transform.Translate(aimDirection, Space.World);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (target != null) {
-            bool flip = (target.transform.position - transform.position).x < 0;
-            if (GetComponent<SpriteRenderer>().flipX != flip) GetComponent<SpriteRenderer>().flipX = flip;
-            GetComponent<Rigidbody2D>().velocity = movementSpeed * (target.transform.position - transform.position).normalized;
-        }
-        else
-        {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
 

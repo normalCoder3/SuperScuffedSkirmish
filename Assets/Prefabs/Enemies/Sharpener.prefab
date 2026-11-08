@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8659507733841132133}
   - component: {fileID: 7551135555777302697}
   - component: {fileID: 1271809904593115145}
+  - component: {fileID: -555317562960795989}
   m_Layer: 0
   m_Name: Sharpener
   m_TagString: Enemy
@@ -185,3 +186,16 @@ MonoBehaviour:
   projectileLifetime: 3
   projectileSpeed: 5
   scoreValue: 300
+--- !u!114 &-555317562960795989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189761482941395900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd10c4ae87dbc8d48aee3669772806d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 1

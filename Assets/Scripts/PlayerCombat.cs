@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
 {
+    [Header("Setup")]
     private AudioManager audioManager;
     private GameObject crosshair;
     private GameController gameController;
     private GameObject healthIcon;
+    private SpriteRenderer spriteRenderer;
     private GameObject weapon;
     [Header("Health")]
     public float health;
@@ -35,6 +37,7 @@ public class PlayerCombat : MonoBehaviour
         crosshair = GameObject.Find("Crosshair");
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         healthIcon = GameObject.Find("Health Icon");
+        spriteRenderer = GetComponent<SpriteRenderer>();
         maxHealth = health;
 
         SetWeapon(GameData.weaponIndex);
@@ -54,20 +57,11 @@ public class PlayerCombat : MonoBehaviour
     {
         Vector2 aimDirection = (crosshair.transform.position - weapon.transform.position).normalized; 
 
-        if (crosshair.GetComponent<SpriteRenderer>().sprite.name == "meleeCrosshair")
-        {
-            crosshair.transform.rotation = Quaternion.Euler(0, 0, Mathf.Rad2Deg * Mathf.Atan2(aimDirection.y, aimDirection.x));
-        } 
-        else if (crosshair.transform.rotation.z != 0)
-        {
-            crosshair.transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-
         bool flip = (crosshair.transform.position - transform.position).x < 0;
-        if (GetComponent<SpriteRenderer>().flipX != flip)
+        if (spriteRenderer.flipX != flip)
         {
-            GetComponent<SpriteRenderer>().flipX = flip;
-            weapon.GetComponent<SpriteRenderer>().flipY = GetComponent<SpriteRenderer>().flipX;
+            spriteRenderer.flipX = flip;
+            weapon.GetComponent<SpriteRenderer>().flipY = spriteRenderer.flipX;
             weapon.transform.position = new(transform.position.x + (flip ? -0.25f : 0.25f), transform.position.y - 0.25f);
         }
 
@@ -90,55 +84,51 @@ public class PlayerCombat : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        TakeHit(collision);
+        if (collision.CompareTag("EnemyProjectile")) {
+            TakeHit(collision.GetComponent<IProjectile>().GetDamage());
+        }
+        else if (collision.CompareTag("Enemy"))
+        {
+            TakeHit(collision.GetComponent<IEnemy>().GetDamage());
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        TakeHit(collision);
+        if (collision.CompareTag("EnemyProjectile"))
+        {
+            TakeHit(collision.GetComponent<IProjectile>().GetDamage());
+        }
+        else if (collision.CompareTag("Enemy"))
+        {
+            TakeHit(collision.GetComponent<IEnemy>().GetDamage());
+        }
     }
 
     private void ExitInvincibility()
     {
-        GetComponent<SpriteRenderer>().color = Color.white;
+        spriteRenderer.color = Color.white;
     }
 
     private void SetWeapon(int index)
     {
         if (weapon != null) Destroy(weapon);
-        try
-        {
-            weapon = Instantiate(weapons[index], transform);
-        }
-        catch
-        {
-            weapon = Instantiate(weapons[0], transform);
-        }
+        weapon = Instantiate(weapons[index], transform);
     }
 
-    private void TakeHit(Collider2D collision)
+    private void TakeHit(float damage)
     {
-        if ((collision.CompareTag("EnemyProjectile") || collision.CompareTag("Enemy")) && Time.time - lastHitTime > invincibilityTime)
+        if (Time.time - lastHitTime > invincibilityTime)
         {
             lastHitTime = Time.time;
-            try
-            {
-                health = Mathf.Max(health - collision.GetComponent<IProjectile>().GetDamage(), 0);
-            }
-            catch (NullReferenceException)
-            {
-                health = Mathf.Max(health - collision.GetComponent<IEnemy>().GetDamage(), 0);
-            }
-            finally
-            {
-                GetComponent<SpriteRenderer>().color = new(1, 0.5f, 0.5f, 1);
-                healthIcon.GetComponent<Image>().sprite = hurtIconImage;
-                Invoke(nameof(ExitInvincibility), invincibilityTime);
-                Instantiate(hitEffect, transform.position, transform.rotation);
-                gameController.UpdateScore(hitScoreDeduction);
-                audioManager.PlaySound("hit1");
-                UpdateHealth();
-            }
+            health -= damage;
+            spriteRenderer.color = new(1, 0.5f, 0.5f, 1);
+            healthIcon.GetComponent<Image>().sprite = hurtIconImage;
+            Invoke(nameof(ExitInvincibility), invincibilityTime);
+            Instantiate(hitEffect, transform.position, transform.rotation);
+            gameController.UpdateScore(hitScoreDeduction);
+            audioManager.PlaySound("hit1");
+            UpdateHealth();
 
             if (health <= 0)
             {
