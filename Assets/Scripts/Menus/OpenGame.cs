@@ -5,8 +5,8 @@ public class OpenGame : MonoBehaviour
 {
     public void OnMouseDown()
     {
-        GameData.score = 0;
         gameObject.GetComponent<AudioSource>().Play();
+        GameData.Reset();
         Invoke(nameof(LoadGame), GetComponent<AudioSource>().clip.length);
     }
 

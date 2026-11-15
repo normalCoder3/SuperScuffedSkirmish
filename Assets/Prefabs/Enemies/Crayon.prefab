@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2083178389229728009}
   - component: {fileID: -7362255554230520687}
   - component: {fileID: 8740117129010896420}
+  - component: {fileID: 564416902297946484}
   m_Layer: 0
   m_Name: Crayon
   m_TagString: Enemy
@@ -177,18 +178,15 @@ MonoBehaviour:
   - {r: 1, g: 0.50980395, b: 0.20000002, a: 1}
   - {r: 0.47450984, g: 0.86274517, b: 0.32156864, a: 1}
   - {r: 0.13725491, g: 0.6156863, b: 0.63529414, a: 1}
+  hitEffect: {fileID: 6093686801365895455, guid: cbdf9657580a5d04e9fb87178c94bd1e, type: 3}
+  lineUpdateInterval: 0.05
+  projectile: {fileID: 5568170869131893410, guid: ff27d20c0f8b1d449bc08ffa453a4ff3, type: 3}
+  projectileDamage: 1
   sprites:
   - {fileID: 21300000, guid: 6ad145a71273e1348969d9871b46ea82, type: 3}
   - {fileID: 21300000, guid: 553e8eb5a8bcd054db68f05f0e52f3c6, type: 3}
   - {fileID: 21300000, guid: 832a301efcaac7c41a74cf0539b042f0, type: 3}
   - {fileID: 21300000, guid: 3242426848480b047a5d8ce01e53b28b, type: 3}
-  movementSpeed: 2
-  damage: 1
-  health: 2
-  hitEffect: {fileID: 6093686801365895455, guid: cbdf9657580a5d04e9fb87178c94bd1e, type: 3}
-  lineUpdateInterval: 0.05
-  projectile: {fileID: 5568170869131893410, guid: ff27d20c0f8b1d449bc08ffa453a4ff3, type: 3}
-  scoreValue: 200
 --- !u!114 &8740117129010896420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,3 +200,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 2
+  target: {fileID: 0}
+--- !u!114 &564416902297946484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258949290692749204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3eaf76e2a540bb449722377e220aecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  health: 2
+  scoreValue: 200

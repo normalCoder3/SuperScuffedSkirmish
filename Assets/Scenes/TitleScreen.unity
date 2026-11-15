@@ -723,10 +723,10 @@ GameObject:
   - component: {fileID: 733662634}
   - component: {fileID: 733662633}
   - component: {fileID: 733662632}
-  - component: {fileID: 733662635}
+  - component: {fileID: 733662637}
   - component: {fileID: 733662636}
   m_Layer: 0
-  m_Name: Quit Button
+  m_Name: Credits Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -796,7 +796,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 733662635}
+      - m_Target: {fileID: 733662637}
         m_TargetAssemblyTypeName: QuitGame, Assembly-CSharp
         m_MethodName: OnMouseDown
         m_Mode: 1
@@ -846,18 +846,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733662630}
   m_CullTransparentMesh: 1
---- !u!114 &733662635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 733662630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e915c6fc1d99b842a77661949084420, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &733662636
 AudioSource:
   m_ObjectHideFlags: 0
@@ -954,6 +942,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &733662637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733662630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e915c6fc1d99b842a77661949084420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &920174689
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Credits
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9247,10 +9247,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062d0001776df0d4798a4786d89eba55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponText: {fileID: 241472793}
   weaponType:
   - Ranged
   - Melee
-  weaponText: {fileID: 241472793}
 --- !u!1 &1240737306
 GameObject:
   m_ObjectHideFlags: 0

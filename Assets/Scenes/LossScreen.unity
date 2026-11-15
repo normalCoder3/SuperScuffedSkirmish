@@ -449,15 +449,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Made by Frankie Su at Code Ninjas Scarborough
-
-
-    Special thanks to
+  m_text: 'Made by Frankie Su at Code Ninjas Scarborough, with special thanks to
     the Code Ninjas senseis for technical help!
 
 
-    Uses UI Sfx 8-Bit Pack by Tremowaves
-    and 8Bit Music - 062022 by GWriterStudio'
+    Uses "UI Sfx 8-Bit Pack" by
+    Tremowaves and "8Bit Music - 062022" by GWriterStudio'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -657,7 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c49bd6ce83b594f85417439963ecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathMessage: {fileID: 591944224}
+  titleMessage: {fileID: 591944224}
   messages:
   - Couldn't be me
   - You lost in a black (well, gold) belt project?
@@ -680,7 +677,7 @@ MonoBehaviour:
   - The unforeseen consequences
   - -999 aura
   - Who does bro think they are
-  - Mission failed, we'll probably get 'em next time
+  - Mission failed, we'll (probably) get 'em next time
   - IS THAT THE GRIM REAPER?!?!!1
   - Are you on "break" right now
   - Nerf sharpeners
@@ -745,14 +742,14 @@ MonoBehaviour:
   m_text: '[Insert death message that bullies the player here]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4281828095
+  m_fontColor: {r: 1, g: 0.50980395, b: 0.21568629, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1223,16 +1220,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991476291}
-  m_LocalRotation: {x: -0, y: -0, z: 0.9143679, w: 0.40488428}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 584205637}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 132.232}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -253, y: -245}
+  m_AnchoredPosition: {x: -254, y: -243}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &991476293
@@ -9721,16 +9718,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705277395}
-  m_LocalRotation: {x: -0, y: -0, z: 0.026192926, w: 0.9996569}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 584205637}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 3.002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -204, y: -224}
+  m_AnchoredPosition: {x: -287, y: -226}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1705277397

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7551135555777302697}
   - component: {fileID: 1271809904593115145}
   - component: {fileID: -555317562960795989}
+  - component: {fileID: 4320794923474845014}
   m_Layer: 0
   m_Name: Sharpener
   m_TagString: Enemy
@@ -172,20 +173,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a97ba6ab34318a408fab70f574e42bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCooldown: 3
+  hitEffect: {fileID: 6093686801365895455, guid: fa10783d0684bd944b3baa248e22b0fa, type: 3}
+  projectile: {fileID: 831977872211496671, guid: 588160586ebcc0f44acb8f456880c352, type: 3}
+  projectileDamage: 1
+  projectileLifetime: 3
+  projectileSpeed: 5
   sprites:
   - {fileID: 21300000, guid: d48dfc9af8f5d304ca3d1dcc716c714b, type: 3}
   - {fileID: 21300000, guid: 30393f894fde3e6448b8f22f66241080, type: 3}
   - {fileID: 21300000, guid: 165630b2023859b488c1371b303951fd, type: 3}
   - {fileID: 21300000, guid: c6f5084827f5bca41a251640f9855dd2, type: 3}
-  movementSpeed: 1
-  attackCooldown: 3
-  damage: 1
-  health: 2
-  hitEffect: {fileID: 6093686801365895455, guid: fa10783d0684bd944b3baa248e22b0fa, type: 3}
-  projectile: {fileID: 831977872211496671, guid: 588160586ebcc0f44acb8f456880c352, type: 3}
-  projectileLifetime: 3
-  projectileSpeed: 5
-  scoreValue: 300
 --- !u!114 &-555317562960795989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,3 +197,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
+  target: {fileID: 0}
+--- !u!114 &4320794923474845014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189761482941395900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3eaf76e2a540bb449722377e220aecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  health: 2
+  scoreValue: 300

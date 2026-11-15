@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Crosshair : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class Crosshair : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         spriteRenderer = GetComponent<SpriteRenderer>();
-        UnityEngine.Cursor.visible = false;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -40,11 +39,11 @@ public class Crosshair : MonoBehaviour
 
     public void SetMelee()
     {
-        GetComponent<SpriteRenderer>().sprite = meleeCrosshair;
+        spriteRenderer.sprite = meleeCrosshair;
     }
 
     public void SetRanged()
     {
-        GetComponent<SpriteRenderer>().sprite = rangedCrosshair;
+        spriteRenderer.sprite = rangedCrosshair;
     }
 }
