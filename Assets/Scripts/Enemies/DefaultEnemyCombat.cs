@@ -24,6 +24,7 @@ public class DefaultEnemyCombat : MonoBehaviour, IEnemy
             if (health <= 0)
             {
                 gameController.UpdateScore(scoreValue);
+                gameController.UpdateEnemyCount(1);
                 audioManager.PlaySound("destroy");
                 Destroy(gameObject);
             }

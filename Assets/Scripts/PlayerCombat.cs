@@ -135,7 +135,6 @@ public class PlayerCombat : MonoBehaviour
                 healthText.color = Color.black;
                 audioManager.PlaySound("destroy");
                 Camera.main.GetComponentInChildren<CinemachineVirtualCamera>().gameObject.SetActive(false);
-                Camera.main.GetComponent<AudioSource>().Stop();
                 Destroy(gameObject);
             }
         }

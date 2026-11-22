@@ -1,7 +1,7 @@
    using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class QuitGame : MonoBehaviour
+public class OpenCredits : MonoBehaviour
 {
     public void OnMouseDown()
     {
@@ -11,6 +11,6 @@ public class QuitGame : MonoBehaviour
 
     private void LoadCredits()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene("Credits");
     }
 }

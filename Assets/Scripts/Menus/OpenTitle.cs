@@ -5,13 +5,12 @@ public class OpenTitle : MonoBehaviour
 {
     public void OnMouseDown()
     {
-        GameData.weaponIndex = 0;
         gameObject.GetComponent<AudioSource>().Play();
         Invoke(nameof(LoadTitleScreen), GetComponent<AudioSource>().clip.length);
     }
 
     private void LoadTitleScreen()
     {
-        SceneManager.LoadScene("TitleScreen");
+        SceneManager.LoadScene("Title");
     }
 }

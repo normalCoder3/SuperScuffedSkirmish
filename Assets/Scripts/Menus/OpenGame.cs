@@ -7,6 +7,13 @@ public class OpenGame : MonoBehaviour
     {
         gameObject.GetComponent<AudioSource>().Play();
         GameData.Reset();
+        if (gameObject.CompareTag("MeleeWeapon")) {
+            GameData.weaponIndex = 1;
+        } 
+        else if (gameObject.CompareTag("RangedWeapon"))
+        {
+            GameData.weaponIndex = 0;
+        }
         Invoke(nameof(LoadGame), GetComponent<AudioSource>().clip.length);
     }
 
